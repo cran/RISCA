@@ -5,11 +5,11 @@
 A Fourth Sample From the DIVAT Data Bank.
 }
 \description{
-Data were extracted from the DIVAT cohort. According to this data set, patient and graft survival can be computed for each hospital. This database was used by Combsecure et al. (2014).
+A data frame with 6648 French kidney transplant recipients from the DIVAT cohort. According to this data set, patient and graft survival can be computed for each hospital. This database was used by Combsecure et al. (2014).
 }
 \usage{data(dataDIVAT4)}
 \format{
-A data frame with the 3 following variables (columns).
+A data frame with the 3 following variables:
   \describe{
     \item{\code{hospital}}{This numeric vector represents the hospital in which the kidney transplantation was performed. Six hospitals were included.}
 	\item{\code{time}}{For right censored data, this numeric vector represents the follow up time (in days). When the event is observed, this numeric vector represents the exact time-to-event.}

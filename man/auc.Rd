@@ -13,7 +13,7 @@ auc(sens, spec)
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{sens}{A numeric vector with the sensitivities}
-  \item{spec}{A numeric vector with the sensitivities}
+  \item{spec}{A numeric vector with the specificities}
   }
 \details{
 This function computes the area under ROC curve using the trapezoidal rule from two vectors of sensitivities and specificities. The value of the area is directly returned.

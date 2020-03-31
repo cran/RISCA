@@ -89,7 +89,6 @@ eu.allA <- u.A0 * meanALL.A + u.A1 * (pro.time - meanALL.A)
 meanALL.B <- meanALL(.temp.data$times, .temp.data$failures, pro.time)
 eu.allB <- u.B0 * meanALL.B + u.B1 * (pro.time - meanALL.B)
 
-
 m.correct <- max(m, eu.allA, eu.allB)
 if (m.correct!=m){
     if (eu.allB < eu.allA){ est <- min(.temp.data$variable)  }

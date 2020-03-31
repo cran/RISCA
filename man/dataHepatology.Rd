@@ -9,7 +9,7 @@ Data were extracted from the studies included in the meta-analysis by Cabibbo et
 }
 \usage{data(dataHepatology)}
 \format{
-A data frame with with the 8 following variables (columns).
+A data frame with with the 8 following variables:
   \describe{
     \item{\code{study}}{This numeric vector represents number of the study.}
 	\item{\code{first.author}}{This vector represents the name of the first author.}

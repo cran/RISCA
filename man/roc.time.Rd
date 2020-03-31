@@ -28,7 +28,7 @@ This function computes confounder-adjusted time-dependent ROC curve with right-c
 \item{auc}{The area under the time-dependent ROC curve for a prognostic up to \code{pro.time}.}
 }
 \references{
-Blanche et al. (2013) Review and comparison of roc curve estimators for a time-dependent outcome with marker-dependent censoring. Biometrical Journal, 55, 687-704. <doi:10.1002/bimj.201200045>
+Blanche et al. (2013) Review and comparison of roc curve estimators for a time-dependent outcome with marker-dependent censoring. Biometrical Journal, 55, 687-704. <doi:10.1002/ bimj.201200045>
 
 Le Borgne F. et al. Standardized and weighted time-dependent ROC curves to evaluate the intrinsic prognostic capacities of a marker by taking into account confounding factors. Manuscript submitted. Stat Methods Med Res. 27(11):3397-3410, 2018. <doi: 10.1177/ 0962280217702416.>
 }

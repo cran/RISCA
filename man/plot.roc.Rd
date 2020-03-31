@@ -44,4 +44,4 @@ plot(roc1, type="b", col=2, pch=2)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{ROC}
+\keyword{Plotting}

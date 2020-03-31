@@ -5,7 +5,7 @@
 A Second Sample From the DIVAT Data Bank.
 }
 \description{
-A data frame with 1912 kidney transplant recipients from the DIVAT cohort.
+A data frame with 1912 French kidney transplant recipients from the DIVAT cohort.
 }
 \usage{data(dataDIVAT2)}
 \format{

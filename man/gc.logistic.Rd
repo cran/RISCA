@@ -7,7 +7,7 @@ Marginal Effect for Binary Outcome by G-computation.
 This function allows to estimate the marginal effect of an exposure or a treatment by G-computation for binary outcomes.
 }
 \usage{
-gc.logistic(glm.obj, data, group, effect, var.method, iterations)
+gc.logistic(glm.obj, data, group, effect, var.method, iterations, n.cluster)
 }
 
 \arguments{
@@ -17,11 +17,11 @@ gc.logistic(glm.obj, data, group, effect, var.method, iterations)
  \item{effect}{The type of the marginal effect to be estimated. Three types are possible (see details): "ATE" (by default), "ATT" and "ATU".}
  \item{var.method}{The method to estimate the variances and the confidence intervals. Two methods are possible: "simulations" (by default) which consists in parametric simulation based on the maximum likelihood estimates of the multivariate logistic regression \code{glm.obj} and "bootstrap" which consists in bootstrap resampling of the database \code{data}.} 
  \item{iterations}{The number of iterations (simulations or resamples depending on the argument in \code{var.method}) to estimate of the variances and confidence intervals.}
+  \item{n.cluster}{The number of cores to use, i.e., the upper limit for the number of child processes that run simultaneously (1 by default).}
  }
  
 \details{
-The ATE corresponds to Average Treatment effect on the Entire population, i.e. the marginal effect if all the sample is treated versus all the sample is untreated. The ATT corresponds to Average Treatment effect on the Treated, i.e. the marginal effect if the treated patients (\code{group = 1}) would have been untreated. The ATU corresponds to Average Treatment effect on the Untreated , i.e. the marginal effect if the untreated patients (\code{group = 0}) would have been treated. Simulation method for variance estimation has a shorter computing time than the boostrap
-method, but bootstrap is more accurate.
+The ATE corresponds to Average Treatment effect on the Entire population, i.e. the marginal effect if all the sample is treated versus all the sample is untreated. The ATT corresponds to Average Treatment effect on the Treated, i.e. the marginal effect if the treated patients (\code{group = 1}) would have been untreated. The ATU corresponds to Average Treatment effect on the Untreated , i.e. the marginal effect if the untreated patients (\code{group = 0}) would have been treated. Simulation method for variance estimation has a shorter computing time than the boostrap method, but bootstrap is more accurate.
 }
 
 \value{
@@ -66,7 +66,7 @@ summary(glm.multi)
 
 #Marginal effects of the treatment (ATE)
 gc.ate <- gc.logistic(glm.obj=glm.multi, data=tab, group="treatment", effect="ATE",
- var.method="simulations", iterations=1000)
+ var.method="simulations", iterations=1000, n.cluster=1)
 
 #Sum-up of the 3 ORs
 data.frame( raw=exp(glm.raw$coefficients[2]),

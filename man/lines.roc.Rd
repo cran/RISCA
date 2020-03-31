@@ -64,4 +64,4 @@ legend("bottomright", lty=1:2, lwd=1, pch=1:2, col=1:2,
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{ROC}
+\keyword{Plotting}

@@ -23,7 +23,7 @@ cut.off <- sort(unique(variable))
 .temp.data <- data.frame(times, failures, variable, treatment)
 .temp.data$failures[.temp.data$times > pro.time] <- 0
 .temp.data$times[.temp.data$times > pro.time] <- pro.time + 0.01
-.na <- is.na(.temp.data$times + .temp.data$failures + .temp.data$variable+ as.numeric(.temp.data$treatment))
+.na <- is.na(.temp.data$times + .temp.data$failures + .temp.data$variable+ as.numeric(as.factor(.temp.data$treatment)))
 .n.na <- sum(.na)
 .temp.data <- .temp.data[.na==FALSE, ]
 

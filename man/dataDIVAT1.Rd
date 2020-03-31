@@ -9,25 +9,16 @@ A data frame with 5943 French kidney transplant recipients from the DIVAT cohort
 }
 \usage{data(dataDIVAT1)}
 \format{
- A data frame with 5943 observations (rows) with the 7 following variables (columns):
-\tabular{rl}{
-\code{trajectory} 
-\tab A numeric vector with the sequences of observed states. The patient evolution can\cr
-\tab be described according to a 4-state structure: X=1 represents the healthy state,\cr
-\tab X=2 represents the acute rejection episode, X=3 the definitive return to dialysis\cr
-\tab and X=4 the death. These times can be right-censored. A vector of covariates is\cr
-\tab also collected at the transplantation, i.e. the baseline of the cohort.\cr											
-\code{time1} \tab A numeric vector with the times (in days) between the transplantation \cr
-	\tab and the first clinical event (acute rejection episode, return to dialysis, \cr
-	\tab or death with a functioning graft), or the times to censoring if \code{trajectory=1} \cr
-\code{time2} \tab A numeric vector with the time between the transplantation and the \cr
-	\tab second clinical event (return to dialysis or death with a functioning graft), \cr
-	\tab  or the the time to censoring if \code{trajectory=12} \cr
-\code{ageR} \tab A numeric vector with the recipient age (in years) at the transplantation.\cr
-\code{sexR} \tab A character vector with the recipient gender. \cr
-\code{year.tx} \tab A numeric vector with the calendar year of the transplantation. \cr
-\code{z} \tab A numeric vector represents the explicative variable under interest, \cr
-	\tab  i.e. the delayed graft function (1=yes, 0=no). \cr
+ A data frame with 5943 observations for the 7 following variables:
+  \describe{
+\item{\code{trajectory}}{A numeric vector with the sequences of observed states. The patient evolution can 
+ be described according to a 4-state structure: X=1 represents the healthy state, X=2 represents the acute rejection episode, X=3 the definitive return to dialysis and X=4 the death. These times can be right-censored. A vector of covariates is also collected at the transplantation, i.e. the baseline of the cohort.}
+\item{\code{time1}}{A numeric vector with the times (in days) between the transplantation and the first clinical event (acute rejection episode, return to dialysis, or death with a functioning graft), or the times to censoring if \code{trajectory=1}.}
+\item{\code{time2}}{A numeric vector with the time between the transplantation and the second clinical event (return to dialysis or death with a functioning graft), or the the time to censoring if \code{trajectory=12}.}
+\item{\code{ageR}}{A numeric vector with the recipient age (in years) at the transplantation.}
+\item{\code{sexR}}{A character vector with the recipient gender.}
+\item{\code{year.tx}}{A numeric vector with the calendar year of the transplantation.}
+\item{\code{z}}{A numeric vector represents the explicative variable under interest, i.e. the delayed graft function (1=yes, 0=no).}
 }
 }
 

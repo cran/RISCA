@@ -127,7 +127,7 @@ semi.markov.3states.rsadd(times1=d3$time1, times2=d3$time2, sequences=d3$traject
   p.age=d3$ageR*365.24,  p.sex=d3$sexR,
   p.year=as.date(paste("01","01",d3$year.tx),order = "mdy"),
   p.rate.table=fr.ratetable,
-  conf.int=TRUE, silent=FALSE, precision=0.001)
+  conf.int=TRUE, silent=FALSE, precision=0.005)
 }
 
 \keyword{Semi-Markov}

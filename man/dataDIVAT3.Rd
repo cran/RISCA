@@ -9,7 +9,7 @@ A data frame with 4267 French kidney transplant recipients.
 }
 \usage{data(dataDIVAT3)}
 \format{
-  A data frame with 4267 observations (raws) with the 8 following variables (columns).
+  A data frame with 4267 observations for the 8 following variables.
   \describe{
     \item{\code{ageR}}{This numeric vector represents the age of the recipient (in years)}
     \item{\code{sexeR}}{This numeric vector represents the gender of the recipient (1=men, 0=female)}

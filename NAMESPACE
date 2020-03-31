@@ -1,9 +1,8 @@
 import(splines)
 import(survival)
-import(riskRegression)
 import(relsurv)
 
-importFrom(stats, pnorm, dnorm, qnorm, update,  binomial, lm, glm, na.omit, predict, quantile, sd, optim, pchisq, update.formula)
+importFrom(stats, pnorm, dnorm, qnorm, update,  binomial, lm, glm, na.omit, predict, quantile, sd, optim, pchisq, update.formula, coef, setNames)
 
 importFrom(date, date.mdy, mdy.date, as.date)
 importFrom(graphics, abline, lines, plot.default)
@@ -11,6 +10,9 @@ importFrom(nlme, nlme, varFixed, varPower)
 importFrom(MASS, mvrnorm)
 importFrom(mvtnorm, rmvnorm)
 importFrom(statmod, gauss.quad)
+importFrom(doParallel, registerDoParallel)
+importFrom(foreach, foreach, registerDoSEQ, "%dopar%")
+importFrom(parallel, clusterEvalQ, makeCluster, stopCluster)
 
 export(ipw.survival)
 export(ipw.log.rank)
@@ -37,6 +39,10 @@ export(roc.time)
 export(roc.summary)
 export(survival.summary)
 export(survival.summary.strata)
+export(differentiation)
+export(rmst)
 
 S3method(plot, roc)
 S3method(lines, roc)
+
+S3method(plot, survival)

@@ -9,7 +9,7 @@ A data frame that presents the aggregated outcomes per center of 5943 French kid
 }
 \usage{data(dataDIVAT5)}
 \format{
-A data frame with 106 observations (rows) with the 8 following variables (columns).
+A data frame with 106 observations for the 8 following variables:
   \describe{
     \item{\code{classe}}{This numeric vector represents the groups of recipients defined using the 1-year serum creatinine. 1 is the first group with the lowest values of 1-year serum creatinine.}
 	\item{\code{n}}{This numeric vector represents the number of recipients at the baseline (date of the transplantation) in each group.}

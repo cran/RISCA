@@ -8,7 +8,8 @@ Marginal Effect for Censored Outcome by G-computation.
 This function allows to estimate the marginal effect of an exposure or a treatment by G-computation for a censored times-to-event.
 }
 \usage{
-gc.survival(coxph.obj, data, group, times, failures, max.time, effect, iterations)
+gc.survival(coxph.obj, data, group, times, failures, max.time,
+ effect, iterations, n.cluster)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -20,6 +21,7 @@ gc.survival(coxph.obj, data, group, times, failures, max.time, effect, iteration
   \item{max.time}{The maximum time of follow-up to estimate of restricted mean survival time (RMST).}
  \item{effect}{The type of marginal effect to be estimated. Three types are possible (see details): "ATE" (by default), "ATT" and "ATU".}
  \item{iterations}{The number of bootstrap resamples to estimate of the variances and the confidence intervals.}
+  \item{n.cluster}{The number of cores to use, i.e., the upper limit for the number of child processes that run simultaneously (1 by default).}
  }
  
 \details{
@@ -27,6 +29,7 @@ The ATE corresponds to Average Treatment effect on the Entire population, i.e. t
 }
 
 \value{
+\item{table.surv}{This data frame presents the survival probabilities (\code{survival}) in each group (\code{variable}) according to the \code{times}. The number of individuals at risk (\code{n.risk}) is also provided.}
 \item{effect}{A character string with the type of selected effect.}
 \item{max.time}{A scalar related to the maximum time of follow-up.}
 \item{RMST0}{A table related to the RMST in the unexposed/untreated sample: \code{estimate} is the estimated value, \code{ci.lower} and \code{ci.upper} represent the 95\% confidence interval.}
@@ -36,7 +39,7 @@ The ATE corresponds to Average Treatment effect on the Entire population, i.e. t
 }
 
 \references{
-Chatton A, Le Borgne F, Leyrat C, Foucher Y. G-computation versus inverse probability weighting for time-to-event analyses. Manuscript in progress. 2019. 
+Chatton et al. G-computation versus inverse probability weighting for time-to-event analyses. Manuscript in progress. 2019. 
 }
 
 \author{
@@ -53,13 +56,15 @@ cox.raw <- coxph(Surv(times,failures) ~ ecd, data=dataDIVAT2, x=TRUE)
 summary(cox.raw)
 
 #Conditional effect of the treatment 
-cox.cdt <- coxph(Surv(times,failures) ~ ecd + age + retransplant, data=dataDIVAT2, x=TRUE)
+cox.cdt <- coxph(Surv(times,failures) ~ ecd + age + retransplant,
+ data=dataDIVAT2, x=TRUE)
 summary(cox.cdt)
 
 #Marginal effect of the treatment (ATE): use 1000 iterations instead of 10
 #We restricted to 10 to respect the CRAN policy in terms of time for computation 
 gc.ate <- gc.survival(coxph.obj=cox.cdt, data=dataDIVAT2, group="ecd", times="times",
- failures="failures", max.time=max(dataDIVAT2$times), iterations=10, effect="ATE")
+ failures="failures", max.time=max(dataDIVAT2$times), iterations=10, effect="ATE",
+ n.cluster=1)
 gc.ate 
 
 #Sum-up of the 3 HRs
@@ -67,6 +72,10 @@ data.frame( raw=exp(cox.raw$coefficients),
 conditional=exp(cox.cdt$coefficients[1]),
 marginal.ate=exp(gc.ate$logHR[,1]) )
 
+#Plot the survival curves
+plot(gc.ate, ylab="Confounder-adjusted survival",
+ xlab="Time post-transplantation (years)", col=c(1,2))
+ 
 }
 
 \keyword{G-computation}
