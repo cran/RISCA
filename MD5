@@ -1,10 +1,11 @@
-ebef2d6d89412cd6400c152e46146dcc *DESCRIPTION
-19ea2312699ca626c7cfb65f8cd2764c *NAMESPACE
+e2e35f9b0c0ae42df48c8e0ed563b9dd *DESCRIPTION
+fc49e9818e9fadc1ccd358cd427111ca *NAMESPACE
 28a2599cad80efdde8b4d0e4ab8cee4a *R/auc.R
-caf6039c0ff46b832daff523a9448ebf *R/differentiation.r
+caf6039c0ff46b832daff523a9448ebf *R/differentiation.R
 570283455a9ccfa38bd1414da499a9cb *R/expect.utility1.R
 f2b7427affc99237b1df94c4a644fc91 *R/expect.utility2.R
 e05413b258bbce0d73fca0c0b7a8a4f7 *R/gc.logistic.R
+354251d63e61b1826580a3cf8652e9d7 *R/gc.sl.binary.R
 455f23daba86ed1cb90ecf6dea421ac2 *R/gc.survival.R
 fb16db212cd41156d344fac819e66854 *R/ipw.log.rank.R
 833185d48088689c0e8b22682376bd4d *R/ipw.survival.R
@@ -18,7 +19,7 @@ d9d9e992a06d6144841282fc76623e03 *R/mixture.2states.R
 38a08cf22908a8bccc7d8ed120c767f3 *R/plot.roc.R
 e90ab361b65cd2bebaf735d78d9bc06a *R/plot.survival.R
 0df83cc13a89c7318c70e1ccf4f9816c *R/pred.mixture.2states.R
-f8c63f2e6770b0a486f663343e4957dd *R/rmst.r
+f8c63f2e6770b0a486f663343e4957dd *R/rmst.R
 8b6916f63b0cfb26e53eeddc5c286d91 *R/roc.binary.R
 3cdfcb26753114b99d21c836234e5d53 *R/roc.net.R
 509367f9fea999965462d93de9dfb3ac *R/roc.summary.R
@@ -58,6 +59,7 @@ df0503cdf4a727bc871214a3c062c401 *man/dataHepatology.Rd
 6de55421fae34342e28f5a78a44a4c6f *man/expect.utility2.Rd
 90165a9f3d638ebf0cb5b9d1a80a745f *man/fr.ratetable.Rd
 f71295323bc7c96ac2c2568611715766 *man/gc.logistic.Rd
+4bf5aaf440a2a7f0b41dc42e2cfbf09d *man/gc.sl.binary.Rd
 774e75f6d4515aa7c609c7bc74a4c7f9 *man/gc.survival.Rd
 ed113fe3f6a98f7cfbd6e91faa6bd472 *man/ipw.log.rank.Rd
 73b1abd44028780f31c93742851bb311 *man/ipw.survival.Rd
@@ -74,7 +76,7 @@ f01d0aec996fbf9c74de8c83d0da6867 *man/predict.mixture.2states.Rd
 65fa5db6b8fc95f4a09e5beff8f07c04 *man/rein.ratetable.Rd
 c073e76e7c07ce6d97c4bab669ad1f66 *man/rmst.Rd
 7cd82e4b71d24c77a56202b028ff520c *man/roc.binary.Rd
-8de2f2aeef9d748a148b91d2bfc28b75 *man/roc.net.Rd
+90138eebf634de8e3a2e0e7fec60c882 *man/roc.net.Rd
 304a44f891db2491ce5ab89a9bcb4302 *man/roc.summary.Rd
 cb26aae7ccea98ea453d51ad45c2134b *man/roc.time.Rd
 b7c5f7569676fa4a457d3dbca9eca145 *man/semi.markov.3states.Rd

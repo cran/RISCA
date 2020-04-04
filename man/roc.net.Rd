@@ -80,7 +80,7 @@ dataDIVAT3$year <- mdy.date(month=01, day=01, year=dataDIVAT3$year.tx,
 dataDIVAT3$age <- dataDIVAT3$ageR*365
 
 # the ROC curve (without correction by the knn estimator) to 
-# reduce the time for computing this example. In prectice, the
+# reduce the time for computing this example. In practice, the
 # correction should by used in case of non-montone results.
 
 roc1 <- roc.net(times=dataDIVAT3$death.time,
