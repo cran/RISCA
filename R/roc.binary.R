@@ -53,7 +53,7 @@ if(dim(.tab.res.temp)[1]>2){
 
 .obj <- list(table=.tab[,c("cut.off", "se", "sp")], auc = .auc)
 
-class(.obj) <- "roc"
+class(.obj) <- "rocrisca"
 
 return(.obj)
 }
@@ -92,7 +92,7 @@ chaine <- paste(chaine,"))/sd(lm.0$residuals)",sep="")
 
 .obj <- list(table=.tab[,c("se", "sp")], auc = .auc)
 
-class(.obj) <- "roc"
+class(.obj) <- "rocrisca"
 
 return(.obj)
 }

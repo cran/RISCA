@@ -5,7 +5,7 @@
 Time-Dependent ROC Curves With Right Censored Data.
 }
 \description{
-This function allows for the estimation of time-dependent ROC curve by taking into account possible confounding factors. Two methods are implemented: i) the standardized and weighted ROC based on an IPW estimator, and ii) the placement values ROC.
+This function allows for the estimation of time-dependent ROC curve by taking into account possible confounding factors. This method is implemented by standardizing and weighting based on an IPW estimator.
 }
 \usage{
 roc.time(times, failures, variable, confounders, data,

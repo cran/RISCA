@@ -1,5 +1,5 @@
 
-gc.sl.binary<-function(outcome, group, cov.quanti=NULL, cov.quali=NULL, data, effect="ATE", tuneLength=3, cv=10, iterations=1000, n.cluster=1)
+gc.sl.binary<-function(outcome, group, cov.quanti=NULL, cov.quali=NULL, data, effect="ATE", tuneLength=20, cv=10, iterations=1000, n.cluster=1)
 {
 
 if(is.null(cov.quanti) & is.null(cov.quali)) {
@@ -83,6 +83,8 @@ data.obs.caret <- data
 data.obs.caret[data[,outcome]==1, outcome] <- "yes"
 data.obs.caret[data[,outcome]==0, outcome] <- "no"
 data.obs.caret[ , outcome] <- as.factor(data.obs.caret[ , outcome])
+
+if(cv>=dim(data.obs.caret)[1]){ stop("The argument \"cv\" must be inferior than the number of subjects with no missing data") }
 
 if(n.cluster==1) {allowParallel <- FALSE}  else { 
 
@@ -672,9 +674,14 @@ mean.logOR <- mean(logOR, na.rm=TRUE)
 mean.p0 <- mean(p0, na.rm=TRUE)
 mean.p1 <- mean(p1, na.rm=TRUE)
 
-pv <- function(x, iterations){if(mean(x)<0){ 2*(sum(x>0)/iterations) } else {2*(sum(x<0)/iterations) }}
-	
-p.value.OR <- pv(logOR, iterations=iterations); if(p.value.OR==0){ p.value.OR <- "<0.001" }
+pv <- function(x){
+  ztest <- mean(x)/sd(x)
+  return(ifelse(ztest<0,2*pnorm(ztest),2*(1-pnorm(ztest))))
+}
+
+p.value.OR <- pv(logOR)
+
+if(p.value.OR==0){ p.value.OR <- "<0.001" }
 
 ci.low.logOR <- quantile(logOR, probs=c(0.025), na.rm=T)
 ci.upp.logOR <- quantile(logOR, probs=c(0.975), na.rm=T)

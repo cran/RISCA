@@ -62,11 +62,11 @@ data=dataDIVAT3, precision=seq(0.1,0.9, by=0.1) )
 
 # The corresponding ROC graph with basic options
 
-plot(roc1)
+plot(roc1, xlab="1-specificity", ylab="sensibility")
 
 # The corresponding ROC graph with color and symbols
 
-plot(roc1, col=2, pch=2, type="b")
+plot(roc1, col=2, pch=2, type="b", xlab="1-specificity", ylab="sensibility")
 
 # The standardized and weighted ROC curve to evaluate the capacities
 # of the recipient age for the prognosis of post kidney transplant
@@ -84,7 +84,7 @@ roc2 <- roc.binary(status="death", variable="ageR_std",
 
 # The corresponding ROC graph
 
-plot(roc2, col=2, pch=2, lty=2, type="b")
+plot(roc2, col=2, pch=2, lty=2, type="b", xlab="1-specificity", ylab="sensibility")
 
 lines(roc1, col=1, pch=1, type="b")
 

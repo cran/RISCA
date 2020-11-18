@@ -78,10 +78,15 @@ if (knn==FALSE) {
 
 .tab.res$sp<-1-.tab.res$sp1
 
-return(list(
-table = .tab.res[,c("cut.off", "se", "sp")],
-auc = sum((.tab.res.temp$sp1[2:length(.tab.res.temp$sp1)]-.tab.res.temp$sp1[1:(length(.tab.res.temp$sp1)-1)])*(.tab.res.temp$se[2:length(.tab.res.temp$se)])),
-missing = .n.na  ) ) }
+.auc <- sum((.tab.res.temp$sp1[2:length(.tab.res.temp$sp1)]-.tab.res.temp$sp1[1:(length(.tab.res.temp$sp1)-1)])*(.tab.res.temp$se[2:length(.tab.res.temp$se)]))
+
+.obj <- list(table=.tab.res[,c("cut.off", "se", "sp")], auc = .auc, missing = .n.na, warning = .warnings)
+
+class(.obj) <- "rocrisca"
+
+return(.obj)
+
+}
 
 
 if (knn==TRUE) {
@@ -146,14 +151,14 @@ if (knn==TRUE) {
 
 .tab.res$sp<-1-.tab.res$sp1
 
+.auc <- sum((.tab.res.temp$sp1[2:length(.tab.res.temp$sp1)] - .tab.res.temp$sp1[1:(length(.tab.res.temp$sp1)-1)]) * 0.5 * (.tab.res.temp$se[2:length(.tab.res.temp$sp1)] + .tab.res.temp$se[1:(length(.tab.res.temp$sp1)-1)]))
 
+.obj <- list(table=.tab.res[,c("cut.off", "se", "sp")], auc = .auc, missing = .n.na, warning = .warnings)
 
-return(list(
-table = .tab.res[,c("cut.off", "se", "sp")],
-auc = sum((.tab.res.temp$sp1[2:length(.tab.res.temp$sp1)] - .tab.res.temp$sp1[1:(length(.tab.res.temp$sp1)-1)]) * 0.5 * (.tab.res.temp$se[2:length(.tab.res.temp$sp1)] + .tab.res.temp$se[1:(length(.tab.res.temp$sp1)-1)])),
-missing = .n.na,
-warning = .warnings ) )
+class(.obj) <- "rocrisca"
 
+return(.obj)
 }
 }
 }
+

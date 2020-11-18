@@ -2,9 +2,10 @@ import(splines)
 import(survival)
 import(relsurv)
 
-importFrom(stats, pnorm, dnorm, qnorm, update,  binomial, lm, glm, na.omit, predict, quantile, sd, optim, pchisq, update.formula, coef, setNames, as.formula, model.matrix)
+importFrom(stats, pnorm, dnorm, qnorm, update,  binomial, lm, glm, na.omit, predict, quantile,
+           sd, optim, pchisq, update.formula, coef, setNames, as.formula, model.matrix)
 importFrom(date, date.mdy, mdy.date, as.date)
-importFrom(graphics, abline, lines, plot.default)
+importFrom(graphics, abline, lines, plot.default, grid)
 importFrom(nlme, nlme, varFixed, varPower)
 importFrom(MASS, mvrnorm)
 importFrom(mvtnorm, rmvnorm)
@@ -47,7 +48,7 @@ export(survival.summary.strata)
 export(differentiation)
 export(rmst)
 
-S3method(plot, roc)
-S3method(lines, roc)
+S3method(plot, rocrisca)
+S3method(lines, rocrisca)
 
-S3method(plot, survival)
+S3method(plot, survrisca)

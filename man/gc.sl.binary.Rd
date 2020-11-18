@@ -15,11 +15,11 @@ gc.sl.binary(outcome, group, cov.quanti, cov.quali, data, effect,
   \item{outcome}{The name of the variable related to the binary outcome variable. This numeric variable must have only two levels: 0 and 1 (for instance: 0=healthy, 1=diseased).}
   \item{group}{The name of the variable related to the exposure/treatment variable. This numeric variable must have only two levels: 0 for the untreated/unexposed patients and 1 for the treated/exposed patients.}
   \item{cov.quanti}{The name(s) of the variable(s) related to the possible quantitative covariates. These variables must be numeric.}
-    \item{cov.quali}{The name(s) of the variable(s) related to the possible qualitative covariates. These variables must be numeric with two levels: 0 and 1. A complete disjunctive form have two be used for covariates with more levels.}
+    \item{cov.quali}{The name(s) of the variable(s) related to the possible qualitative covariates. These variables must be numeric with two levels: 0 and 1. A complete disjunctive form must be used for covariates with more levels.}
   \item{data}{A data frame in which to look for the variable related to the outcome, the treatment/exposure and the covariables.}
  \item{effect}{The type of the marginal effect to be estimated. Three types are possible (see details): "ATE" (by default), "ATT" and "ATU".}
- \item{tuneLength}{It defines the total number of parameter combinations that will be evaluated in the machine learning techniques.} 
- \item{cv}{The number of splits for cross-validation.}
+ \item{tuneLength}{It defines the total number of parameter combinations that will be evaluated in the machine learning techniques. The default value is 10.} 
+ \item{cv}{The number of splits for cross-validation.  The default value is 10.}
  \item{iterations}{The number of bootstrap resamples to estimate of the variances and confidence intervals.}
   \item{n.cluster}{The number of cores to use, i.e., the upper limit for the number of child processes that run simultaneously (1 by default).}
  }
@@ -29,7 +29,7 @@ The ATE corresponds to Average Treatment effect on the Entire population, i.e. t
 }
 
 \value{
-\item{misssing}{Number of deleted observations due to missing data.}
+\item{missing}{Number of deleted observations due to missing data.}
 \item{effect}{A character string with the type of the marginal effect.}
 \item{p0}{A table related to the average proportion of events in the unexposed/untreated sample: \code{estimate} is the estimated value, \code{ci.lower} and \code{ci.upper} represent the 95\% confidence interval.}
 \item{p1}{A table related to the average proportion of events in the exposed/treated sample: \code{estimate} is the estimated value, \code{ci.lower} and \code{ci.upper} represent the 95\% confidence interval.}

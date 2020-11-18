@@ -94,10 +94,7 @@ roc1$table
 
 # the traditional ROC graph
 
-plot(c(1,1-roc1$table$sp,0), c(1,roc1$table$se,0), ylim=c(0,1), xlim=c(0,1), 
- ylab="sensitivity", xlab="1-specificity", type="l", lty=1, col=2, lwd=2)
- 
-abline(c(0,0), c(1,1), lty=2)
+plot(roc1, col=2, pch=2, lty=2, type="b", xlab="1-specificity", ylab="sensibility")
 
 legend("bottomright", paste("Without knn, (AUC=",
  round(roc1$auc, 2), ")", sep=""),lty=1, lwd=2, col=2)

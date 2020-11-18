@@ -22,7 +22,7 @@ ipw.survival <- function(times, failures, variable, weights=NULL)
                     variable = i))
 					}
 				.obj <- list(table.surv=table.surv)
-				class(.obj) <- "survival"
+				class(.obj) <- "survrisca"
 				return(.obj)
 			}
 		}

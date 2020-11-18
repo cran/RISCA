@@ -1,12 +1,13 @@
 Package: RISCA
 Type: Package
 Title: Causal Inference and Prediction in Cohort-Based Analyses
-Version: 0.8.2
+Version: 0.9
 Depends: R (>= 2.10), splines, survival, relsurv
 Imports: date, graphics, nlme, MASS, mvtnorm, statmod, parallel,
         doParallel, foreach, nnet, kernlab, glmnet, caret, SuperLearner
 Authors@R: c(
-    person("Yohann", "Foucher", email = "Yohann.Foucher@univ-nantes.fr", role = c("aut", "cre"), comment = c(ORCID = "0000-0003-0330-7457")),
+    person("Yohann", "Foucher", email = "Yohann.Foucher@univ-nantes.fr", role = c("aut", "cre"), comment = 
+    c(ORCID = "0000-0003-0330-7457")),
     person("Florent", "Le Borgne", email = "fleborgne@idbc.fr", role = "aut"),
 	person("Etienne", "Dantan", email = "Etienne.Dantan@univ-nantes.fr", role = "aut"),
     person("Florence", "Gillaizeau", email = "Florence.Gillaizeau@univ-nantes.fr", role = "aut"),
@@ -17,7 +18,7 @@ License: GPL (>= 2)
 LazyLoad: yes
 URL: www.labcom-risca.com
 NeedsCompilation: no
-Packaged: 2020-04-04 17:01:15 UTC; foucher-y
+Packaged: 2020-11-17 21:17:37 UTC; foucher-y
 Author: Yohann Foucher [aut, cre] (<https://orcid.org/0000-0003-0330-7457>),
   Florent Le Borgne [aut],
   Etienne Dantan [aut],
@@ -26,4 +27,4 @@ Author: Yohann Foucher [aut, cre] (<https://orcid.org/0000-0003-0330-7457>),
   Christophe Combescure [aut]
 Maintainer: Yohann Foucher <Yohann.Foucher@univ-nantes.fr>
 Repository: CRAN
-Date/Publication: 2020-04-05 00:00:06 UTC
+Date/Publication: 2020-11-18 20:20:03 UTC

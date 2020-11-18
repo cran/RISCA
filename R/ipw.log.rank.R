@@ -42,21 +42,21 @@ if(is.null(weights)){ .w <- rep(1, length(times)) }	else { .w <- weights }
 	w.event0<-crosssum(d.time, times[subset0==1], .w[subset0==1])
 	subset1<-(failures==1)*(variable==1)
 	w.event1<-crosssum(d.time, times[subset1==1], .w[subset1==1])
-	w.event0<-w.event0*n.risk0/w.risk0
-	w.event1<-w.event1*n.risk1/w.risk1
+	# w.event0<-w.event0*n.risk0/w.risk0 #modification for the 0.9 version
+	# w.event1<-w.event1*n.risk1/w.risk1 #modification for the 0.9 version
 	w.event<-w.event0+w.event1
 		
 	ww.risk0<-crosssum(d.time, times[variable==0], (.w*.w)[variable==0])
 	ww.risk1<-crosssum(d.time, times[variable==1], (.w*.w)[variable==1])
 	ww.risk0<-rev(cumsum(rev(ww.risk0)))
 	ww.risk1<-rev(cumsum(rev(ww.risk1)))
-	ww.risk0<-ww.risk0*n.risk0*n.risk0/(w.risk0*w.risk0)
-	ww.risk1<-ww.risk1*n.risk1*n.risk1/(w.risk1*w.risk1)
+	# ww.risk0<-ww.risk0*n.risk0*n.risk0/(w.risk0*w.risk0) #modification for the 0.9 version
+	# ww.risk1<-ww.risk1*n.risk1*n.risk1/(w.risk1*w.risk1) #modification for the 0.9 version
 
-	log.mean<-sum(w.event1-n.risk1*w.event/n.risk)
-	#log.mean<-sum(w.event1-w.risk1*w.event/w.risk)
+	# log.mean<-sum(w.event1-n.risk1*w.event/n.risk)
+	log.mean<-sum(w.event1-w.risk1*w.event/w.risk)
 	
-	log.var<-sum(mod.rate*(n.risk0*n.risk0*ww.risk1+n.risk1*n.risk1*ww.risk0)/(n.risk*n.risk))
+	log.var<-sum(mod.rate*(w.risk0*w.risk0*ww.risk1 + w.risk1*w.risk1*ww.risk0)/(w.risk*w.risk))
 	v.akm<-log.mean/sqrt(log.var)
 
 	return(list(statistic=v.akm,

@@ -44,7 +44,7 @@ data(dataDIVAT2)
   variable=dataDIVAT2$ecd, weights=W)
   
 plot(res.akm, ylab="Confounder-adjusted survival",
- xlab="Time post-transplantation (years)", col=c(1,2))
+ xlab="Time post-transplantation (years)", col=c(1,2), grid.lty=1)
 }
 
 

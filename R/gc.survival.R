@@ -305,10 +305,13 @@ RMST0.s <- as.numeric(res[,"RMST0.s"])
 
 se.logHR <- sd(logHR.s, na.rm=TRUE)
 
-pv <- function(x, iterations){
-	if(mean(x)<0){ 2*(sum(x>0)/iterations) } else {2*(sum(x<0)/iterations) } }
+pv <- function(x){
+  ztest <- mean(x)/sd(x)
+  return(ifelse(ztest<0,2*pnorm(ztest),2*(1-pnorm(ztest))))
+}
 
-p.value.HR <- pv(logHR.s, iterations=iterations)
+p.value.HR <- pv(logHR.s)
+
 if(p.value.HR==0){ p.value.HR <- "<0.001" }
 
 ci.low.logHR <- quantile(logHR.s, probs=c(0.025), na.rm=T)
@@ -321,9 +324,11 @@ ci.low.RMST0 <- quantile(RMST0.s, probs=c(0.025), na.rm=T)
 ci.upp.RMST0 <- quantile(RMST0.s, probs=c(0.975), na.rm=T)
 
 delta.s <- RMST1.s - RMST0.s
+
 se.delta <- sd(delta.s, na.rm=TRUE)
 
-p.value.delta <- pv(delta.s, iterations=iterations)
+p.value.delta <- pv(delta.s)
+
 if(p.value.delta==0){ p.value.delta <- "<0.001" }
 
 ci.low.delta <- quantile(delta.s, probs=c(0.025), na.rm=T)
@@ -342,7 +347,7 @@ ci.upp.delta <- quantile(delta.s, probs=c(0.975), na.rm=T)
 	logHR=data.frame(estimate=logHR, std.error = se.logHR, ci.lower=ci.low.logHR,
 		ci.upper=ci.upp.logHR, p.value=p.value.HR) )
 
-class(.obj) <- "survival"
+class(.obj) <- "survrisca"
 return(.obj)
 }
 

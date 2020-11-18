@@ -186,11 +186,13 @@ if(var.method=="bootstrap"){
 
 se.logOR <- sd(logOR.s, na.rm=TRUE)
 
+pv <- function(x){
+  ztest <- mean(x)/sd(x)
+  return(ifelse(ztest<0,2*pnorm(ztest),2*(1-pnorm(ztest))))
+}
 
-pv <- function(x, iterations){
-	if(mean(x)<0){ 2*(sum(x>0)/iterations) } else {2*(sum(x<0)/iterations) } }
-	
-p.value.OR <- pv(logOR.s, iterations=iterations)
+p.value.OR <- pv(logOR.s)
+
 if(p.value.OR==0){ p.value.OR <- "<0.001" }
 
 ci.low.logOR <- quantile(logOR.s, probs=c(0.025), na.rm=T)
