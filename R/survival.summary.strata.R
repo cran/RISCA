@@ -1,6 +1,4 @@
 
-
-
 survival.summary.strata<-function(study, time, n.risk, surv.rate, confidence, strata)
 {
 

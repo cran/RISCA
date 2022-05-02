@@ -7,7 +7,7 @@ Marginal Effect for Binary Outcome by G-computation.
 This function allows to estimate the marginal effect of an exposure or a treatment by G-computation for binary outcomes.
 }
 \usage{
-gc.logistic(glm.obj, data, group, effect, var.method, iterations, n.cluster)
+gc.logistic(glm.obj, data, group, effect, var.method, iterations, n.cluster, cluster.type)
 }
 
 \arguments{
@@ -17,7 +17,8 @@ gc.logistic(glm.obj, data, group, effect, var.method, iterations, n.cluster)
  \item{effect}{The type of the marginal effect to be estimated. Three types are possible (see details): "ATE" (by default), "ATT" and "ATU".}
  \item{var.method}{The method to estimate the variances and the confidence intervals. Two methods are possible: "simulations" (by default) which consists in parametric simulation based on the maximum likelihood estimates of the multivariate logistic regression \code{glm.obj} and "bootstrap" which consists in bootstrap resampling of the database \code{data}.} 
  \item{iterations}{The number of iterations (simulations or resamples depending on the argument in \code{var.method}) to estimate of the variances and confidence intervals.}
-  \item{n.cluster}{The number of cores to use, i.e., the upper limit for the number of child processes that run simultaneously (1 by default).}
+ \item{n.cluster}{The number of cores to use, i.e., the upper limit for the number of child processes that run simultaneously (1 by default).}
+ \item{cluster.type}{A character string with the type of parallelization. The default type is "PSOCK" (it calls makePSOCKcluster, faster on MacOS or Linux platforms). An alternative is "FORK" (it calls makeForkCluster, it does not work on Windows platforms).}
  }
  
 \details{

@@ -53,10 +53,10 @@ if (length(pro.time)!=1) stop("Argument 'pro.time' must be a single numeric valu
 
 if(length(time.cutoff)==4)
 {
-assign(".s1", time.cutoff[1], envir = parent.frame()) 
-assign(".s2", time.cutoff[2], envir = parent.frame()) 
-assign(".s3", time.cutoff[3], envir = parent.frame()) 
-assign(".s4", time.cutoff[4], envir = parent.frame()) 
+assign(".s1", time.cutoff[1], envir =  parent.frame()) 
+assign(".s2", time.cutoff[2], envir =  parent.frame()) 
+assign(".s3", time.cutoff[3], envir =  parent.frame()) 
+assign(".s4", time.cutoff[4], envir =  parent.frame()) 
 
 assign("d.int", function(mu, sigma, min1, max1)
 {
@@ -97,7 +97,7 @@ return(
     poids[28]*dnorm(0.5*.expr1*noeuds[28]+0.5*.expr2, mean=mu, sd=exp(sigma))+ 
     poids[29]*dnorm(0.5*.expr1*noeuds[29]+0.5*.expr2, mean=mu, sd=exp(sigma))+ 
 	poids[30]*dnorm(0.5*.expr1*noeuds[30]+0.5*.expr2, mean=mu, sd=exp(sigma)) ) )
-}, envir = parent.frame())
+}, envir =  parent.frame())
 
 
 assign("d.surv5", function(z, t, beta0.1, beta0.2, beta1.1, beta1.2, beta2.1, beta2.2, beta3.1, beta3.2, beta4.1, beta4.2, mu, sigma)
@@ -119,7 +119,7 @@ assign("d.surv5", function(z, t, beta0.1, beta0.2, beta1.1, beta1.2, beta2.1, be
 (-.l1*exp(.expr0) - .l2*exp(.expr0+.expr1) - .l3*exp(.expr0+.expr1+.expr2) - (t-.s3)*exp(.expr0+.expr1+.expr2+.expr3))*(t>.s3)*(t<=.s4)+
 (-.l1*exp(.expr0) - .l2*exp(.expr0+.expr1) - .l3*exp(.expr0+.expr1+.expr2) - .l4*exp(.expr0+.expr1+.expr2+.expr3) -(t-.s4)*exp(.expr0+.expr1+.expr2+.expr3+.expr4) )*(t>.s4)
 return(exp(.expr5) * dnorm(z, mean=mu, sd=exp(sigma)))
-}, envir = parent.frame())
+}, envir =  parent.frame())
 
 
 assign("p.joint.model5", function(beta0.1, beta0.2, beta1.1, beta1.2, beta2.1, beta2.2, beta3.1, beta3.2, beta4.1, beta4.2, mu, sigma, t, min.z, max.z)
@@ -160,7 +160,7 @@ return( .exprA*(
  poids[28]*d.surv5(.exprA*noeuds[28]+.exprB, t, beta0.1, beta0.2, beta1.1, beta1.2, beta2.1, beta2.2, beta3.1, beta3.2, beta4.1, beta4.2, mu, sigma)+ 
  poids[29]*d.surv5(.exprA*noeuds[29]+.exprB, t, beta0.1, beta0.2, beta1.1, beta1.2, beta2.1, beta2.2, beta3.1, beta3.2, beta4.1, beta4.2, mu, sigma)+ 
  poids[30]*d.surv5(.exprA*noeuds[30]+.exprB, t, beta0.1, beta0.2, beta1.1, beta1.2, beta2.1, beta2.2, beta3.1, beta3.2, beta4.1, beta4.2, mu, sigma) ) )
-}, envir = parent.frame()) 
+}, envir =  parent.frame()) 
 
 assign("se.sp.marg5", function(cut, tps)
 {
@@ -190,7 +190,7 @@ exprC.<-p.joint.model5(est.beta0.1, est.beta0.2, est.beta1.1, est.beta1.2, est.b
 
 return( c(( exprA. - exprB.  ) / ( 1 - exprC. ) , 1- exprB. / exprC.) )
 
-}, envir = parent.frame()) 
+}, envir =  parent.frame()) 
 
 .data <- data.frame(classe, n, year, surv, nrisk,  proba, marker.min, marker.max, study.num)
 
@@ -214,7 +214,7 @@ nlme1 <- suppressWarnings(nlme(proba ~ d.int(mu, sigma, marker.min, marker.max),
 
 nlme1 <- suppressWarnings(update(nlme1, weights=varFixed(~n), data=.eff))
 
-assign("nlme1", nlme1, envir = parent.frame())
+assign("nlme1", nlme1, envir =  parent.frame())
 
 .data$mu<-nlme1$coefficients$fixed[1] +
     nlme1$coefficients$random$study.num[.data$study.num]
@@ -240,7 +240,7 @@ nlme2<-suppressWarnings(nlme(p.joint ~ p.joint.model5(beta0.1, beta0.2, beta1.1,
 
 nlme2<-suppressWarnings(nlme(p.joint ~ p.joint.model5(beta0.1, beta0.2, beta1.1, beta1.2, beta2.1, beta2.2, beta3.1, beta3.2, beta4.1, beta4.2, mu, sigma, year, marker.min, marker.max), fixed = beta0.1 + beta0.2 + beta1.1 + beta1.2 + beta2.1 + beta2.2 + beta3.1 + beta3.2 + beta4.1 + beta4.2 ~ 1, random = beta0.1 ~ 1|study.num, start = c(nlme2$coefficients$fixed, 0, 0), weights=varPower(form= ~nrisk), data = .data))
 
-assign("nlme2", nlme2, envir = parent.frame())
+assign("nlme2", nlme2, envir =  parent.frame())
 
 .roc<-data.frame( cut=seq(
 qnorm(0.01, mean = nlme1$coefficients$fixed[1], sd = exp(nlme1$coefficients$fixed[2]), lower.tail = TRUE, log.p = FALSE), 
@@ -260,22 +260,30 @@ lower.tail = TRUE, log.p = FALSE),
 .data$fitted <- nlme2$fitted[,2]
 .data$resid <- .data$p.joint - .data$fitted
 
-return(list(
-nlme1 = nlme1,
-nlme2 = nlme2,
-table = data.frame(cut.off=.roc$cut, se=.se.sp[1,], sp=.se.sp[2,]),
-auc = .auc,
-data.marker = .eff,
-data.surv = .data ))
+.tab <- data.frame(cut.off=.roc$cut, se=.se.sp[1,], sp1=1-.se.sp[2,])
+.tab <- .tab[order(.tab$sp1, .tab$se), ]
 
-rm(nlme2, nlme1, se.sp.marg5, p.joint.model5, d.surv5, d.int)
+.tab <- rbind(c(NA, 0, 0), .tab, c(NA, 1, 1))
+.tab$sp <- 1 - .tab$sp1
+
+.obj <- list(
+  nlme1 = nlme1,
+  nlme2 = nlme2,
+  table = .tab[,c("cut.off", "se", "sp")],
+  auc = .auc,
+  data.marker = .eff,
+  data.surv = .data )
+
+class(.obj) <- "rocrisca"
+
+return(.obj)
 }
 
 if(length(time.cutoff)==3)
 {
-assign(".s1", time.cutoff[1], envir = parent.frame())
-assign(".s2", time.cutoff[2], envir = parent.frame())
-assign(".s3", time.cutoff[3], envir = parent.frame())
+assign(".s1", time.cutoff[1], envir =  parent.frame())
+assign(".s2", time.cutoff[2], envir =  parent.frame())
+assign(".s3", time.cutoff[3], envir =  parent.frame())
 
 assign("d.int", function(mu, sigma, min1, max1)
 {
@@ -316,7 +324,7 @@ return(
     poids[28]*dnorm(0.5*.expr1*noeuds[28]+0.5*.expr2, mean=mu, sd=exp(sigma))+ 
     poids[29]*dnorm(0.5*.expr1*noeuds[29]+0.5*.expr2, mean=mu, sd=exp(sigma))+ 
 	poids[30]*dnorm(0.5*.expr1*noeuds[30]+0.5*.expr2, mean=mu, sd=exp(sigma)) ) )
-} , envir = parent.frame()) 
+} , envir =  parent.frame()) 
 
 assign("d.surv4", function(z, t, beta0.1, beta0.2, beta1.1, beta1.2, beta2.1, beta2.2, beta3.1, beta3.2, mu, sigma)
 {
@@ -336,7 +344,7 @@ assign("d.surv4", function(z, t, beta0.1, beta0.2, beta1.1, beta1.2, beta2.1, be
 (-.l1*exp(.expr0) -.l2*exp(.expr0+.expr1) -.l3*exp(.expr0+.expr1+.expr2) - (t-.s3)*exp(.expr0+.expr1+.expr2+.expr3))*(t>.s3)
 
 return(exp(.expr5) * dnorm(z, mean=mu, sd=exp(sigma)))
-} , envir = parent.frame())
+} , envir =  parent.frame())
 
 assign("p.joint.model4", function(beta0.1, beta0.2, beta1.1, beta1.2, beta2.1, beta2.2, beta3.1, beta3.2, mu, sigma, t, min.z, max.z)
 {
@@ -377,7 +385,7 @@ return( .exprA*(
  poids[28]*d.surv4(.exprA*noeuds[28]+.exprB, t, beta0.1, beta0.2, beta1.1, beta1.2, beta2.1, beta2.2, beta3.1, beta3.2, mu, sigma)+ 
  poids[29]*d.surv4(.exprA*noeuds[29]+.exprB, t, beta0.1, beta0.2, beta1.1, beta1.2, beta2.1, beta2.2, beta3.1, beta3.2, mu, sigma)+ 
  poids[30]*d.surv4(.exprA*noeuds[30]+.exprB, t, beta0.1, beta0.2, beta1.1, beta1.2, beta2.1, beta2.2, beta3.1, beta3.2, mu, sigma) ) )
-} , envir = parent.frame()) 
+} , envir =  parent.frame()) 
 
 assign("se.sp.marg4", function(cut, tps)
 {
@@ -403,7 +411,7 @@ exprB.<-p.joint.model4(est.beta0.1, est.beta0.2, est.beta1.1, est.beta1.2, est.b
 exprC.<-p.joint.model4(est.beta0.1, est.beta0.2, est.beta1.1, est.beta1.2, est.beta2.1, est.beta2.2, est.beta3.1, est.beta3.2, est.mu, est.sigma, tps, .marker.min, .marker.max)
 
 return( c(( exprA. - exprB.  ) / ( 1 - exprC. ) , 1- exprB. / exprC.) )
-} , envir = parent.frame())
+} , envir =  parent.frame())
 
 .data <- data.frame(classe, n, year, surv, nrisk, proba, marker.min, marker.max, study.num)
 
@@ -427,7 +435,7 @@ nlme1 <- suppressWarnings(nlme(proba ~ d.int(mu, sigma, marker.min, marker.max),
 
 nlme1 <- suppressWarnings(update(nlme1, weights=varFixed(~n), data=.eff))
 
-assign("nlme1", nlme1, envir = parent.frame()) 
+assign("nlme1", nlme1, envir =  parent.frame()) 
 
 .data$mu<-nlme1$coefficients$fixed[1] +
     nlme1$coefficients$random$study.num[.data$study.num]
@@ -449,7 +457,7 @@ nlme2<-suppressWarnings(nlme(p.joint ~ p.joint.model4(beta0.1, beta0.2, beta1.1,
 
 nlme2<-suppressWarnings(nlme(p.joint ~ p.joint.model4(beta0.1, beta0.2, beta1.1, beta1.2, beta2.1, beta2.2, beta3.1, beta3.2, mu, sigma, year, marker.min, marker.max), fixed = beta0.1 + beta0.2 + beta1.1 + beta1.2 + beta2.1 + beta2.2 + beta3.1 + beta3.2~ 1, random = beta0.1 ~ 1|study.num, start = c(nlme2$coefficients$fixed, 0, 0), weights=varPower(form= ~nrisk), data = .data))
 
-assign("nlme2", nlme2, envir = parent.frame())
+assign("nlme2", nlme2, envir =  parent.frame())
 
 .roc<-data.frame( cut=seq(
 qnorm(0.01, mean = nlme1$coefficients$fixed[1], sd = exp(nlme1$coefficients$fixed[2]), lower.tail = TRUE, log.p = FALSE), 
@@ -469,15 +477,23 @@ lower.tail = TRUE, log.p = FALSE),
 .data$fitted <- nlme2$fitted[,2]
 .data$resid <- .data$p.joint - .data$fitted
 
-return(list(
+.tab <- data.frame(cut.off=.roc$cut, se=.se.sp[1,], sp1=1-.se.sp[2,])
+.tab <- .tab[order(.tab$sp1, .tab$se), ]
+
+.tab <- rbind(c(NA, 0, 0), .tab, c(NA, 1, 1))
+.tab$sp <- 1 - .tab$sp1
+
+.obj <- list(
 nlme1 = nlme1,
 nlme2 = nlme2,
-table = data.frame(cut.off=.roc$cut, se=.se.sp[1,], sp=.se.sp[2,]),
+table = .tab[,c("cut.off", "se", "sp")],
 auc = .auc,
 data.marker = .eff,
-data.surv = .data ))
+data.surv = .data )
 
-rm(nlme2, nlme1, se.sp.marg4, p.joint.model4, d.surv4, d.int)
+class(.obj) <- "rocrisca"
+
+return(.obj)
 }
 
 }

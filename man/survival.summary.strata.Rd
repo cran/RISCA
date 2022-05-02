@@ -32,7 +32,7 @@ The survival probabilities have to be extracted at the same set of points in tim
 \item{p.value}{The p-value of the test for the null hypothesis that the between-strata heterogeneity is null.}
 }
 \references{
-Combescure et al. The multivariate DerSimonian and Laird's methodology applied to meta-analysis of survival curves. 10;33(15):2521-37, 2014. Statistics in Medicine. <doi: 10.1002/sim.6111>
+Combescure et al. The multivariate DerSimonian and Laird's methodology applied to meta-analysis of survival curves. 10;33(15):2521-37, 2014. Statistics in Medicine. <doi:10.1002/sim.6111>
 }
 \author{
 Y. Foucher <Yohann.Foucher@univ-nantes.fr>
@@ -57,4 +57,4 @@ results<-survival.summary.strata(study = study, time = time, n.risk = n.risk,
 results
 }
 
-\keyword{Pooled statistic}
+\keyword{Survival}

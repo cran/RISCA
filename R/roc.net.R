@@ -10,7 +10,7 @@ roc.net <- function(times, failures, variable, p.age, p.sex, p.year, rate.table,
 
 .temp.data <- .temp.data[!is.na(.temp.data$times + .temp.data$failures + .temp.data$variable + .temp.data$age + 1*(.temp.data$sex=="male") + .temp.data$year),]
    
-.rs.model <- try(summary(relsurv::rs.surv(Surv(times, failures)~ 1 + ratetable(age=age, sex=sex, year=year),  ratetable=rate.table, data=.temp.data, method="pohar-perme")), silent = TRUE)
+.rs.model <- try(summary(rs.surv(Surv(times, failures)~ 1 + ratetable(age=age, sex=sex, year=year),  ratetable=rate.table, data=.temp.data, method="pohar-perme")), silent = TRUE)
 
   if(inherits(.rs.model, "try-error")) {return(NA)}
   
@@ -28,7 +28,7 @@ if (knn==FALSE) {
   
 .temp.se<-function(x) {
 
-  .rs.model.cond <- try(summary(relsurv::rs.surv(Surv(times, failures)~ 1 + ratetable(age=age, sex=sex, year=year),  ratetable=rate.table, data=.temp.data[.temp.data$variable>x,], method="pohar-perme")), silent = TRUE)
+  .rs.model.cond <- try(summary(rs.surv(Surv(times, failures)~ 1 + ratetable(age=age, sex=sex, year=year),  ratetable=rate.table, data=.temp.data[.temp.data$variable>x,], method="pohar-perme")), silent = TRUE)
   
   if(inherits(.rs.model.cond, "try-error")) {return(NA)}
 
@@ -45,7 +45,7 @@ if (knn==FALSE) {
 		   
 .temp.sp<-function(x) {
   
-  .rs.model.cond <- try(summary(relsurv::rs.surv(Surv(times, failures)~ 1 + ratetable(age=age, sex=sex, year=year),  ratetable=rate.table, data=.temp.data[.temp.data$variable<=x,], method="pohar-perme")), silent = TRUE)
+  .rs.model.cond <- try(summary(rs.surv(Surv(times, failures)~ 1 + ratetable(age=age, sex=sex, year=year),  ratetable=rate.table, data=.temp.data[.temp.data$variable<=x,], method="pohar-perme")), silent = TRUE)
 
   if(inherits(.rs.model.cond, "try-error")) {return(NA)}
 
@@ -107,7 +107,7 @@ if (knn==TRUE) {
 
 .survie.x<-function(x)  {
 
-   .tmp<-try(summary(relsurv::rs.surv(Surv(times, failures)~ 1 + ratetable(age=age, sex=sex, year=year),  ratetable=rate.table, data=.temp.data[max(1, (x-.pas)):min((x+.pas), .n),], method="pohar-perme")), silent = TRUE)
+   .tmp<-try(summary(rs.surv(Surv(times, failures)~ 1 + ratetable(age=age, sex=sex, year=year),  ratetable=rate.table, data=.temp.data[max(1, (x-.pas)):min((x+.pas), .n),], method="pohar-perme")), silent = TRUE)
 
   if(inherits(.tmp, "try-error")) {return(NA)}
 

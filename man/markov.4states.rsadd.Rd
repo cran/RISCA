@@ -130,7 +130,7 @@ markov.4states.rsadd(times1=d3$time1, times2=d3$time2, sequences=d3$trajectory,
   ini.dist.23=c(9.43), ini.dist.24=c(11.11),
   cov.12=d3$z, init.cov.12=c(0.04), names.12=c("beta12_z"),
   p.age=d3$ageR*365.24, p.sex=d3$sexR,
-  p.year=as.date(paste("01","01",d3$year.tx), order = "mdy"),
+  p.year=date::as.date(paste("01","01",d3$year.tx), order = "mdy"),
   p.rate.table=fr.ratetable, conf.int=TRUE,
   silent=FALSE, precision=0.001)
 }

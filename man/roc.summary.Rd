@@ -52,59 +52,43 @@ Christophe Combescure <christophe.combescure@hcuge.ch>
 # Remove the characters '#'
 
 ### import and attach the data example
-#data(dataKi67)
+data(dataKi67)
 
 ### Compute the SROC curve for a prognostic up to 9 years
-#roc9y<-roc.summary(dataKi67$study.num, dataKi67$classe, dataKi67$n,
-# dataKi67$year, dataKi67$surv, dataKi67$nrisk, dataKi67$proba,
-# dataKi67$log.marker.min, dataKi67$log.marker.max,
-# init.nlme1=c(2.55, -0.29), precision=50, pro.time=9,
-# time.cutoff=c(2, 4, 6, 8))
-
-### Compute the SROC curve for a prognostic up to 3 years
-#roc3y<-roc.summary(dataKi67$study.num, dataKi67$classe, dataKi67$n,
-# dataKi67$year, dataKi67$surv, dataKi67$nrisk, dataKi67$proba,
-# dataKi67$log.marker.min, dataKi67$log.marker.max,
-# init.nlme1=c(2.55, -0.29), precision=50, pro.time=3,
-# time.cutoff=c(2, 4, 6, 8))
+roc9y<-roc.summary(dataKi67$study.num, dataKi67$classe, dataKi67$n,
+ dataKi67$year, dataKi67$surv, dataKi67$nrisk, dataKi67$proba,
+ dataKi67$log.marker.min, dataKi67$log.marker.max,
+ init.nlme1=c(2.55, -0.29), precision=50, pro.time=9,
+ time.cutoff=c(2, 4, 8))
 
 ### The ROC graph associated to these to SROC curves
-#plot(c(1,1-roc9y$table$sp,0), c(1,roc9y$table$se,0),
-# xlab="1-specificity", ylab="sensitivity", type="l",
-# col=1, lty=1, lwd=2)
-
-#lines(c(1,1-roc3y$table$sp,0), c(1,roc3y$table$se,0), type="l",
-# col=2, lty=2, lwd=2)
-
-#legend("bottomright", c(paste("Prognostic up to 9 years (AUC=",
-#  round(roc9y$auc,2), ")", sep=""), paste(
-#  "Prognostic up to 3 years (AUC=",  round(roc3y$auc,2), ")",
-#  sep="")), col=c(1, 2), lty=c(1, 2), lwd=c(2, 2))
+plot(roc9y, col=1, lty=1, lwd=2, type="l", xlab="1-specificity", ylab="sensibility")
 
 ### Check of the goodness-of-fit: the observed proportions of
 ### patients in the $g$th interval of the study $k$ versus the
 ### fitted proportions (equation 3).
-#plot(roc9y$data.marker$proba, roc9y$data.marker$fitted,
-# xlab="Observed probabilities", ylab="Fitted probabilities",
-# ylim=c(0,1), xlim=c(0,1))
-#abline(0,1)
+
+plot(roc9y$data.marker$proba, roc9y$data.marker$fitted,
+ xlab="Observed probabilities", ylab="Fitted probabilities",
+ ylim=c(0,1), xlim=c(0,1))
+abline(0,1)
 
 ### Check of the goodness-of-fit: the observed bivariate
 ### probabilities versus the fitted bivariate
 ### probabilities (equation 4).
 
-#plot(roc9y$data.surv$p.joint, roc9y$data.surv$fitted,
-# xlab="Observed probabilities", ylab="Fitted probabilities",
-# ylim=c(0,1), xlim=c(0,1))
-#abline(0,1)
+plot(roc9y$data.surv$p.joint, roc9y$data.surv$fitted,
+ xlab="Observed probabilities", ylab="Fitted probabilities",
+ ylim=c(0,1), xlim=c(0,1))
+abline(0,1)
 
 ### Check of the goodness-of-fit: the residuals of the bivariate
 ### probabilities (equation 4) versus the times.
 
-#plot(roc9y$data.surv$year, roc9y$data.surv$resid,
-# xlab="Survival time (years)", ylab="Residuals")
-#lines(lowess(roc9y$data.surv$year,
-# I(roc9y$data.surv$resid), iter=0))
+plot(roc9y$data.surv$year, roc9y$data.surv$resid,
+ xlab="Survival time (years)", ylab="Residuals")
+lines(lowess(roc9y$data.surv$year,
+ I(roc9y$data.surv$resid), iter=0))
 }
 
 \keyword{ROC}

@@ -66,12 +66,13 @@ dataDIVAT3$ageR_std <- (dataDIVAT3$ageR - (lm1$coef[1] + lm1$coef[2] * dataDIVAT
 roc2 <- roc.time(times="death.time", failures="death", variable="ageR_std",
 confounders=~bs(ageD, df=3) + sexeR, data=dataDIVAT3, pro.time=2000,
 precision=seq(0.1,0.9, by=0.2))
+
 # The corresponding ROC graph
-plot(1-roc2$table$sp, roc2$table$se, ylim=c(0,1), xlim=c(0,1), ylab="sensitivity",
-xlab="1-specificity", type="l", lty=1, col=1, lwd=2)
-abline(c(0,0), c(1,1), lty=2)
+plot(roc2, col=2, pch=2, lty=1, type="b", xlab="1-specificity", ylab="sensibility")
+
+
 # The corresponding AUC
 roc2$auc}
 
-
 \keyword{ROC}
+\keyword{Survival}

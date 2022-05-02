@@ -8,7 +8,7 @@ This function allows to estimate the marginal effect of an exposure or a treatme
 }
 \usage{
 gc.sl.binary(outcome, group, cov.quanti, cov.quali, data, effect,
- tuneLength, cv, iterations, n.cluster)
+ tuneLength, cv, iterations, n.cluster, cluster.type)
 }
 
 \arguments{
@@ -22,6 +22,7 @@ gc.sl.binary(outcome, group, cov.quanti, cov.quali, data, effect,
  \item{cv}{The number of splits for cross-validation.  The default value is 10.}
  \item{iterations}{The number of bootstrap resamples to estimate of the variances and confidence intervals.}
   \item{n.cluster}{The number of cores to use, i.e., the upper limit for the number of child processes that run simultaneously (1 by default).}
+  \item{cluster.type}{A character string with the type of parallelization. The default type is "PSOCK" (it calls makePSOCKcluster, faster on MacOS or Linux platforms). An alternative is "FORK" (it calls makeForkCluster, it does not work on Windows platforms).}
  }
  
 \details{

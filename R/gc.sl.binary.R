@@ -1,5 +1,6 @@
 
-gc.sl.binary<-function(outcome, group, cov.quanti=NULL, cov.quali=NULL, data, effect="ATE", tuneLength=20, cv=10, iterations=1000, n.cluster=1)
+gc.sl.binary<-function(outcome, group, cov.quanti=NULL, cov.quali=NULL, data, effect="ATE",
+                tuneLength=20, cv=10, iterations=1000, n.cluster=1, cluster.type="PSOCK")
 {
 
 if(is.null(cov.quanti) & is.null(cov.quali)) {
@@ -87,41 +88,46 @@ data.obs.caret[ , outcome] <- as.factor(data.obs.caret[ , outcome])
 if(cv>=dim(data.obs.caret)[1]){ stop("The argument \"cv\" must be inferior than the number of subjects with no missing data") }
 
 if(n.cluster==1) {allowParallel <- FALSE}  else { 
+  allowParallel <- TRUE
+  cl <- makeCluster(n.cluster, type=cluster.type)
+  registerDoParallel(cl)
+  clusterEvalQ(cl, {library(splines); library(SuperLearner)}) }
 
-allowParallel <- TRUE
-
-if(.Platform[[1]] == "windows") {cl <- makeCluster(n.cluster, type="PSOCK") } else{ cl <- makeCluster(n.cluster, type="FORK") }
-		
-registerDoParallel(cl)
-
-clusterEvalQ(cl, {library(splines); library(SuperLearner)})
-}
-
-control <- trainControl(allowParallel = TRUE,  verboseIter = FALSE, classProbs = TRUE, summaryFunction = twoClassSummary,  method = "cv", number = cv)
+control <- trainControl(allowParallel = TRUE,  verboseIter = FALSE, classProbs = TRUE,
+                        summaryFunction = twoClassSummary,  method = "cv", number = cv)
 
 .f.nnet <- as.formula(paste(outcome, "~ .", sep = " "))
 
-nnet <-  train(.f.nnet, data = data.obs.caret, method = 'nnet', tuneLength = tuneLength, metric = "ROC", trControl = control, trace = FALSE)
+nnet <-  train(.f.nnet, data = data.obs.caret, method = 'nnet', tuneLength = tuneLength,
+               metric = "ROC", trControl = control, trace = FALSE)
 
 
 if(!is.null(cov.quanti) & !is.null(cov.quali)) {
-.f.glm <- as.formula( paste(outcome, "~", group, "*(", paste("bs(", cov.quanti, ", df=3)", collapse = " + "), " + ", paste(cov.quali, collapse = " + "),  ")", collapse = " ") ) }
+.f.glm <- as.formula( paste(outcome, "~", group, "*(", paste("bs(", cov.quanti, ", df=3)",
+            collapse = " + "), " + ", paste(cov.quali, collapse = " + "),  ")", collapse = " ") ) }
 
 if(!is.null(cov.quanti) & is.null(cov.quali)) {
-.f.glm <- as.formula( paste(outcome, "~", group, "*(", paste("bs(", cov.quanti, ", df=3)", collapse = " + "), ")", collapse = " ") ) }
+.f.glm <- as.formula( paste(outcome, "~", group, "*(", paste("bs(", cov.quanti, ", df=3)",
+            collapse = " + "), ")", collapse = " ") ) }
 
 if(is.null(cov.quanti) & !is.null(cov.quali)) {
-.f.glm <- as.formula( paste(outcome, "~", group, "*(", paste(cov.quali, collapse = " + "),  ")", collapse = " ") ) }
+.f.glm <- as.formula( paste(outcome, "~", group, "*(", paste(cov.quali, collapse = " + "),
+            ")", collapse = " ") ) }
 
 full <- glm( .f.glm, family = binomial(link = logit),  data = data)
 
 .l <- length(full$coefficients)
 
-elasticnet <-  train(.f.glm, data = data.obs.caret, method = 'glmnet', tuneLength = tuneLength, metric = "ROC", trControl = control, family = "binomial", penalty.factor = c(0, rep(1, .l-1)) )
+elasticnet <-  train(.f.glm, data = data.obs.caret, method = 'glmnet', tuneLength = tuneLength,
+    metric = "ROC", trControl = control, family = "binomial", penalty.factor = c(0, rep(1, .l-1)) )
 
-lasso <- train(.f.glm, data = data.obs.caret, method = 'glmnet', tuneGrid = expand.grid(.alpha = 1, .lambda = unique(elasticnet$results$lambda)), metric = "ROC", trControl = control, family = "binomial", penalty.factor = c(0, rep(1, .l-1)) )
+lasso <- train(.f.glm, data = data.obs.caret, method = 'glmnet',
+               tuneGrid = expand.grid(.alpha = 1, .lambda = unique(elasticnet$results$lambda)),
+               metric = "ROC", trControl = control, family = "binomial",
+               penalty.factor = c(0, rep(1, .l-1)) )
 
-svmRadial <-  train(.f.nnet, data = data.obs.caret, method = 'svmRadialSigma', trace = FALSE, tuneLength = tuneLength, metric = "ROC", trControl = control)
+svmRadial <-  train(.f.nnet, data = data.obs.caret, method = 'svmRadialSigma', trace = FALSE,
+               tuneLength = tuneLength, metric = "ROC", trControl = control)
 
 N <- dim(data)[1]
 
@@ -674,26 +680,27 @@ mean.logOR <- mean(logOR, na.rm=TRUE)
 mean.p0 <- mean(p0, na.rm=TRUE)
 mean.p1 <- mean(p1, na.rm=TRUE)
 
-pv <- function(x){
-  ztest <- mean(x)/sd(x)
+pv <- function(m, x){
+  ztest <- m/sd(x)
   return(ifelse(ztest<0,2*pnorm(ztest),2*(1-pnorm(ztest))))
 }
 
-p.value.OR <- pv(logOR)
+p.value.OR <- pv(m=mean.logOR, x=logOR)
+  
 
 if(p.value.OR==0){ p.value.OR <- "<0.001" }
 
-ci.low.logOR <- quantile(logOR, probs=c(0.025), na.rm=T)
-ci.upp.logOR <- quantile(logOR, probs=c(0.975), na.rm=T)
+ci.low.logOR <- mean.logOR - qnorm(0.975, 0, 1)*se.logOR
+ci.upp.logOR <- mean.logOR + qnorm(0.975, 0, 1)*se.logOR
 
-ci.low.delta <- quantile(delta, probs=c(0.025), na.rm=T)
-ci.upp.delta <- quantile(delta, probs=c(0.975), na.rm=T)
+ci.low.delta <- mean.delta - qnorm(0.975, 0, 1)*se.delta
+ci.upp.delta <- mean.delta + qnorm(0.975, 0, 1)*se.delta
 
-ci.low.p0 <- quantile(p0, probs=c(0.025), na.rm=T)
-ci.upp.p0 <- quantile(p0, probs=c(0.975), na.rm=T)
+ci.low.p0 <- mean.p0 - qnorm(0.975, 0, 1)*se.p0
+ci.upp.p0 <- mean.p0 + qnorm(0.975, 0, 1)*se.p0
 
-ci.low.p1 <- quantile(p1, probs=c(0.025), na.rm=T)
-ci.upp.p1 <- quantile(p1, probs=c(0.975), na.rm=T)
+ci.low.p1 <- mean.p1 - qnorm(0.975, 0, 1)*se.p1
+ci.upp.p1 <- mean.p1 + qnorm(0.975, 0, 1)*se.p1
 
 return( list(
 missing=sum(.na),

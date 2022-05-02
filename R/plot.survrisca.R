@@ -1,5 +1,5 @@
 
-plot.survrisca <- function(x, ..., col=1, lty=1, lwd=1, max.time=NULL, min.y=0, max.y=1, grid.lty=NULL){
+plot.survrisca <- function(x, ..., col=1, lty=1, lwd=1, type="s", max.time=NULL, min.y=0, max.y=1, grid.lty=NULL){
 
 col <- rep(col, ceiling(length(sort(unique(x$table.surv$variable)))/length(col)) )
 lty <- rep(lty, ceiling(length(sort(unique(x$table.surv$variable)))/length(lty)) )
@@ -7,7 +7,7 @@ lwd <- rep(lwd, ceiling(length(sort(unique(x$table.surv$variable)))/length(lwd))
 
 max.x <- min(max.time, max(x$table.surv$times))
 
-plot.default(NULL, xlim=c(0, max.x), ylim=c(min.y, max.y), col=col, lty=lty, lwd=lwd, ...)
+plot.default(NULL, xlim=c(0, max.x), ylim=c(min.y, max.y), col=col, lty=lty, lwd=lwd, type=type, ...)
 
 if(!is.null(grid.lty)) {grid(lty=grid.lty, col="grey90")}
         
@@ -16,7 +16,7 @@ j <- 1
 			lines(
 			x$table.surv$times[x$table.surv$variable==i & x$table.surv$times<=max.x],
 			x$table.surv$survival[x$table.surv$variable==i & x$table.surv$times<=max.x],
-			col=col[j], lty=lty[j], lwd=lwd[j]
+			col=col[j], lty=lty[j], lwd=lwd[j], type=type
 			)
 		j <- j + 1
 	}

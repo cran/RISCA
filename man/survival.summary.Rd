@@ -32,7 +32,7 @@ The survival probabilities have to be extracted at the same set of points in tim
 \item{mean.random}{A numerical vector containing the estimated mean survival time computed from the summary survival curve assuming random effects and the lower and upper bounds of the 95\% confidence interval computed by a Monte Carlo approach.}
 }
 \references{
-Combescure et al. The multivariate DerSimonian and Laird's methodology applied to meta-analysis of survival curves. 10;33(15):2521-37, 2014. Statistics in Medicine. <doi: 10.1002/sim.6111>
+Combescure et al. The multivariate DerSimonian and Laird's methodology applied to meta-analysis of survival curves. 10;33(15):2521-37, 2014. Statistics in Medicine. <doi:10.1002/sim.6111>
 }
 \author{
 Y. Foucher <Yohann.Foucher@univ-nantes.fr>
@@ -75,5 +75,5 @@ points(RandomEffectSummary[,1], RandomEffectSummary[,4], type="l",
  col="red", lty=3, lwd=3)
 }
 
-\keyword{Pooled statistic}
+\keyword{Survival}
 
