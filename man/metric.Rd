@@ -35,7 +35,7 @@ A numeric value with the metric estimation.
 }
 
 \author{
-Yohann Foucher <Yohann.Foucher@univ-nantes.fr>
+Yohann Foucher <Yohann.Foucher@univ-poitiers.fr>
 
 Camille Sabathe <camille.sabathe@univ-nantes.fr>
 }

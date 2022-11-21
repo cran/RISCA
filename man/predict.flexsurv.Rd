@@ -30,7 +30,7 @@ The model \code{object} is obtained from the \code{flexsurvreg} package.
 }
 
 \author{
-Yohann Foucher <Yohann.Foucher@univ-nantes.fr>
+Yohann Foucher <Yohann.Foucher@univ-poitiers.fr>
 
 Camille Sabathe <camille.sabathe@univ-nantes.fr>
 }
@@ -39,12 +39,9 @@ Camille Sabathe <camille.sabathe@univ-nantes.fr>
 
 data(dataDIVAT2)
 
-# The estimation of the training model
-model<-ph.gompertz(times="times", failures="failures", data=dataDIVAT2,
+# The estimation of the model from the first 200 lignes
+model<-ph.gompertz(times="times", failures="failures", data=dataDIVAT2[1:200,],
   cov.quanti=c("age"),  cov.quali=c("hla", "retransplant", "ecd"))
-
-# Predicted survival for subjects of the training sample
-pred <- predict(model)
 
 # Predicted survival for 2 new subjects
 pred <- predict(model,

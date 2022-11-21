@@ -38,11 +38,11 @@ The function runs the \code{deepsurv} function of the \code{survivalmodels} pack
 }
 
 \references{
-Katzman, J. L., Shaham, U., Cloninger, A., Bates, J., Jiang, T., & Kluger, Y. (2018). DeepSurv: personalized treatment recommender system using a Cox proportional hazards deep neural network. BMC Medical Research Methodology, 18(1), 24. https://doi.org/10.1186/s12874-018-0482-1
+Katzman et al.  DeepSurv: personalized treatment recommender system using a Cox proportional hazards deep neural network. BMC Medical Research Methodology, 18(1), 24. 1018. https://doi.org/10.1186/s12874-018-0482-1
 }
 
 \author{
-Yohann Foucher <Yohann.Foucher@univ-nantes.fr>
+Yohann Foucher <Yohann.Foucher@univ-poitiers.fr>
 
 Camille Sabathe <camille.sabathe@univ-nantes.fr>
 }

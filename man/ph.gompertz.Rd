@@ -45,7 +45,7 @@ Jackson, C. (2016). flexsurv: A Platform for Parametric Survival Modeling in R. 
 }
 
 \author{
-Yohann Foucher <Yohann.Foucher@univ-nantes.fr>
+Yohann Foucher <Yohann.Foucher@univ-poitiers.fr>
 
 Camille Sabathe <camille.sabathe@univ-nantes.fr>
 }
@@ -54,14 +54,13 @@ Camille Sabathe <camille.sabathe@univ-nantes.fr>
 
 data(dataDIVAT2)
 
-# The estimation of the model
-model<-ph.gompertz(times="times", failures="failures", data=dataDIVAT2,
+# The estimation of the model from the first 200 lignes
+model<-ph.gompertz(times="times", failures="failures", data=dataDIVAT2[1:200,],
   cov.quanti=c("age"),  cov.quali=c("hla", "retransplant", "ecd"))
 
 # The predicted survival of the first subject of the training sample
 plot(y=model$predictions[1,], x=model$times, xlab="Time (years)", ylab="Predicted survival",
      col=1, type="l", lty=1, lwd=2, ylim=c(0,1))
-
 }
 
 \keyword{Super Learner Library}

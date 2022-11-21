@@ -26,7 +26,7 @@ Predict the survival of new observations based on a neural network estimated by 
 
 
 \author{
-Yohann Foucher <Yohann.Foucher@univ-nantes.fr>
+Yohann Foucher <Yohann.Foucher@univ-poitiers.fr>
 
 Camille Sabathe <camille.sabathe@univ-nantes.fr>
 }

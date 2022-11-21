@@ -86,11 +86,11 @@ To estimate the marginal effect of a binary exposure, the \code{weights} may be 
 \references{
 Gillaizeau et al. Inverse Probability Weighting to control confounding in an illness-death model for interval-censored data. Stat Med. 37(8):1245-1258, 2018. <doi: 10.1002/sim.7550>.
 
-Gillaizeau et al. A multistate additive relative survival semi-Markov model. Statistical methods in medical research. 26(4):1700-1711, 2017. <DOI: 10.1177/ 0962280215586456>
+Gillaizeau et al. A multistate additive relative survival semi-Markov model. Statistical methods in medical research. 26(4):1700-1711, 2017. <doi: 10.1177/ 0962280215586456>.
 }
 
 \author{
-Yohann Foucher <Yohann.Foucher@univ-nantes.fr>
+Yohann Foucher <Yohann.Foucher@univ-poitiers.fr>
 
 Florence Gillaizeau <Florence.Gillaizeau@univ-nantes.fr>
 }

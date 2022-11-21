@@ -43,11 +43,11 @@ The ATE corresponds to Average Treatment effect on the Entire population, i.e. t
 }
 
 \references{
-Chatton et al. G-computation versus inverse probability weighting for time-to-event analyses. Manuscript in progress. 2019. 
+Sabathe and Foucher. Super Learner for survival prediction from censored data: Extension of the R package RISCA. Manuscript submitted. 2022. 
 }
 
 \author{
-Yohann Foucher <Yohann.Foucher@univ-nantes.fr>
+Yohann Foucher <Yohann.Foucher@univ-poitiers.fr>
 }
 
 \examples{

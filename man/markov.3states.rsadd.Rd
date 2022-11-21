@@ -82,7 +82,7 @@ Gillaizeau et al. Inverse Probability Weighting to control confounding in an ill
 }
 
 \author{
-Yohann Foucher <Yohann.Foucher@univ-nantes.fr>
+Yohann Foucher <Yohann.Foucher@univ-poitiers.fr>
 
 Florence Gillaizeau <Florence.Gillaizeau@univ-nantes.fr>
 }

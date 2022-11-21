@@ -15,11 +15,8 @@ Used to add an additionnal ROC curve to ROC plot generated with \code{plot.rocri
   \code{roc.net}, \code{roc.summary}, and \code{roc.time}.}
   \item{...}{Additional arguments affecting the plot line.}
 }
-\references{
-Le Borgne et al. Standardized and weighted time-dependent ROC curves to evaluate the intrinsic prognostic capacities of a marker by taking into account confounding factors. Manuscript submitted. Stat Methods Med Res. 27(11):3397-3410, 2018. <doi: 10.1177/ 0962280217702416.>
-}
 \author{
-Yohann Foucher <Yohann.Foucher@univ-nantes.fr>
+Yohann Foucher <Yohann.Foucher@univ-poitiers.fr>
 }
 
 \examples{

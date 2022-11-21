@@ -26,7 +26,7 @@ For instance, the \code{weights} may be equal to 1/\code{p}, where \code{p} is t
 Le Borgne et al. Comparisons of the performances of different statistical tests for time-to-event analysis with confounding factors: practical illustrations in kidney transplantation. Statistics in medicine. 30;35(7):1103-16, 2016. <doi:10.1002/ sim.6777>
 }
 \author{
-Yohann Foucher <Yohann.Foucher@univ-nantes.fr>
+Yohann Foucher <Yohann.Foucher@univ-poitiers.fr>
 
 Florent Le Borgne <fleborgne@idbc.fr>
 }

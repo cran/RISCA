@@ -30,11 +30,11 @@ The conditional effect is estimated by a conditional hazard ratio (HR), which co
 }
 
 \references{
-Foucher et al. Manuscript in progress. 2021. 
+Sabathe and Foucher. Super Learner for survival prediction from censored data: Extension of the R package RISCA. Manuscript submitted. 2022.
 }
 
 \author{
-Yohann Foucher <Yohann.Foucher@univ-nantes.fr>
+Yohann Foucher <Yohann.Foucher@univ-poitiers.fr>
 }
 
 \examples{

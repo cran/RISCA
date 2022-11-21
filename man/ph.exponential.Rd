@@ -46,7 +46,7 @@ Jackson, C. (2016). flexsurv: A Platform for Parametric Survival Modeling in R. 
 }
 
 \author{
-Yohann Foucher <Yohann.Foucher@univ-nantes.fr>
+Yohann Foucher <Yohann.Foucher@univ-poitiers.fr>
 
 Camille Sabathe <camille.sabathe@univ-nantes.fr>
 }
@@ -55,8 +55,8 @@ Camille Sabathe <camille.sabathe@univ-nantes.fr>
 
 data(dataDIVAT2)
 
-# The estimation of the model
-model<-ph.exponential(times="times", failures="failures", data=dataDIVAT2,
+# The estimation of the model from the first 200 lignes
+model<-ph.exponential(times="times", failures="failures", data=dataDIVAT2[1:200,],
   cov.quanti=c("age"),  cov.quali=c("hla", "retransplant", "ecd"))
 
 # The predicted survival of the first subject of the training sample

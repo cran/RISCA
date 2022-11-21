@@ -1,5 +1,5 @@
 
-gc.sl.binary<-function(outcome, group, cov.quanti=NULL, cov.quali=NULL, data, effect="ATE",
+gc.sl.binary<-function(outcome, group, cov.quanti=NULL, cov.quali=NULL, keep=TRUE, data, effect="ATE",
                 tuneLength=20, cv=10, iterations=1000, n.cluster=1, cluster.type="PSOCK")
 {
 
@@ -78,7 +78,7 @@ if(sum(apply(data.frame(data[,cov.quali]), MARGIN=2, FUN="unique"))!=length(cov.
 
 if(sum(.na)>0) {warning("Individuals with missing values will be removed from the analysis \n")}
 
-data <- data[.na==FALSE,]
+data <- data[.na==FALSE, c(outcome, group, cov.quanti, cov.quali)]
 
 data.obs.caret <- data
 data.obs.caret[data[,outcome]==1, outcome] <- "yes"
@@ -118,13 +118,26 @@ full <- glm( .f.glm, family = binomial(link = logit),  data = data)
 
 .l <- length(full$coefficients)
 
+if(keep==TRUE) {
+
 elasticnet <-  train(.f.glm, data = data.obs.caret, method = 'glmnet', tuneLength = tuneLength,
     metric = "ROC", trControl = control, family = "binomial", penalty.factor = c(0, rep(1, .l-1)) )
 
 lasso <- train(.f.glm, data = data.obs.caret, method = 'glmnet',
                tuneGrid = expand.grid(.alpha = 1, .lambda = unique(elasticnet$results$lambda)),
                metric = "ROC", trControl = control, family = "binomial",
-               penalty.factor = c(0, rep(1, .l-1)) )
+               penalty.factor = c(0, rep(1, .l-1)) ) }
+
+
+if(keep==FALSE) {
+  
+  elasticnet <-  train(.f.glm, data = data.obs.caret, method = 'glmnet', tuneLength = tuneLength,
+                       metric = "ROC", trControl = control, family = "binomial" )
+  
+  lasso <- train(.f.glm, data = data.obs.caret, method = 'glmnet',
+                 tuneGrid = expand.grid(.alpha = 1, .lambda = unique(elasticnet$results$lambda)),
+                 metric = "ROC", trControl = control, family = "binomial" ) }
+
 
 svmRadial <-  train(.f.nnet, data = data.obs.caret, method = 'svmRadialSigma', trace = FALSE,
                tuneLength = tuneLength, metric = "ROC", trControl = control)
@@ -148,9 +161,13 @@ if(n.cluster==1){
 	X <- model.matrix(.f.caret, X)
   
 	newX <- model.matrix(.f.caret,  newX)
-  
-	fitElastic <- glmnet(x = X, y = Y, family = "binomial", alpha = elasticnet$bestTune$alpha, lambda = elasticnet$bestTune$lambda, penalty.factor = c(0, rep(1, .l-1)) )
-  
+	
+	if(keep==TRUE) {
+	fitElastic <- glmnet(x = X, y = Y, family = "binomial", alpha = elasticnet$bestTune$alpha, lambda = elasticnet$bestTune$lambda, penalty.factor = c(0, rep(1, .l-1)) ) }
+	
+	if(keep==FALSE) {
+	  fitElastic <- glmnet(x = X, y = Y, family = "binomial", alpha = elasticnet$bestTune$alpha, lambda = elasticnet$bestTune$lambda ) }
+	
 	pred <- predict(fitElastic, newx = newX, type = "response")
 	fit <- list(object = fitElastic)
 	class(fit) <- "SL.elasticnet.caret"
@@ -165,8 +182,12 @@ if(n.cluster==1){
   
 	newX <-  model.matrix(.f.caret,  newX)
   
-	fitLasso <- glmnet(x = X, y = Y, family = "binomial", alpha = 1,  lambda = lasso$bestTune$lambda,  penalty.factor = c(0, rep(1, .l-1)))
-  
+	if(keep==TRUE) {
+	fitLasso <- glmnet(x = X, y = Y, family = "binomial", alpha = 1,  lambda = lasso$bestTune$lambda,  penalty.factor = c(0, rep(1, .l-1))) }
+	
+	if(keep==FALSE) {
+	  fitLasso <- glmnet(x = X, y = Y, family = "binomial", alpha = 1,  lambda = lasso$bestTune$lambda) }
+	
 	pred <- predict(fitLasso, newx = newX, type = "response")
 	fit <- list(object = fitLasso)
 	class(fit) <- "SL.lasso.caret"
@@ -379,9 +400,13 @@ bsim <- function() {
 	X <- model.matrix(.f.caret, X)
   
 	newX <- model.matrix(.f.caret,  newX)
-  
-	fitElastic <- glmnet(x = X, y = Y, family = "binomial", alpha = elasticnet$bestTune$alpha, lambda = elasticnet$bestTune$lambda, penalty.factor = c(0, rep(1, .l-1)) )
-  
+	
+	if(keep==TRUE) {
+	fitElastic <- glmnet(x = X, y = Y, family = "binomial", alpha = elasticnet$bestTune$alpha, lambda = elasticnet$bestTune$lambda, penalty.factor = c(0, rep(1, .l-1)) )  }
+	
+	if(keep==FALSE) {
+	fitElastic <- glmnet(x = X, y = Y, family = "binomial", alpha = elasticnet$bestTune$alpha, lambda = elasticnet$bestTune$lambda )  }
+	
 	pred <- predict(fitElastic, newx = newX, type = "response")
 	fit <- list(object = fitElastic)
 	class(fit) <- "SL.elasticnet.caret"
@@ -394,9 +419,13 @@ bsim <- function() {
 	X <-  model.matrix(.f.caret,  X)
   
 	newX <-  model.matrix(.f.caret,  newX)
-  
-	fitLasso <- glmnet(x = X, y = Y, family = "binomial", alpha = 1,  lambda = lasso$bestTune$lambda,  penalty.factor = c(0, rep(1, .l-1)))
-  
+	
+	if(keep==TRUE) {
+	fitLasso <- glmnet(x = X, y = Y, family = "binomial", alpha = 1,  lambda = lasso$bestTune$lambda,  penalty.factor = c(0, rep(1, .l-1))) }
+	
+	if(keep==FALSE) {
+	  fitLasso <- glmnet(x = X, y = Y, family = "binomial", alpha = 1,  lambda = lasso$bestTune$lambda) }
+	
 	pred <- predict(fitLasso, newx = newX, type = "response")
 	fit <- list(object = fitLasso)
 	class(fit) <- "SL.lasso.caret"
@@ -484,8 +513,12 @@ bsim <- function(){
   
 	newX <- model.matrix(.f.caret,  newX)
   
-	fitElastic <- glmnet(x = X, y = Y, family = "binomial", alpha = elasticnet$bestTune$alpha, lambda = elasticnet$bestTune$lambda, penalty.factor = c(0, rep(1, .l-1)) )
-  
+	if(keep==TRUE) {
+	fitElastic <- glmnet(x = X, y = Y, family = "binomial", alpha = elasticnet$bestTune$alpha, lambda = elasticnet$bestTune$lambda, penalty.factor = c(0, rep(1, .l-1)) ) }
+	
+	if(keep==FALSE) {
+	  fitElastic <- glmnet(x = X, y = Y, family = "binomial", alpha = elasticnet$bestTune$alpha, lambda = elasticnet$bestTune$lambda ) }
+	
 	pred <- predict(fitElastic, newx = newX, type = "response")
 	fit <- list(object = fitElastic)
 	class(fit) <- "SL.elasticnet.caret"
@@ -500,8 +533,12 @@ bsim <- function(){
   
 	newX <-  model.matrix(.f.caret,  newX)
   
-	fitLasso <- glmnet(x = X, y = Y, family = "binomial", alpha = 1,  lambda = lasso$bestTune$lambda,  penalty.factor = c(0, rep(1, .l-1)))
-  
+	if(keep==TRUE) {
+	fitLasso <- glmnet(x = X, y = Y, family = "binomial", alpha = 1,  lambda = lasso$bestTune$lambda,  penalty.factor = c(0, rep(1, .l-1))) }
+	
+	if(keep==FALSE) {
+	fitLasso <- glmnet(x = X, y = Y, family = "binomial", alpha = 1,  lambda = lasso$bestTune$lambda) }
+	
 	pred <- predict(fitLasso, newx = newX, type = "response")
 	fit <- list(object = fitLasso)
 	class(fit) <- "SL.lasso.caret"
@@ -590,8 +627,12 @@ bsim <- function(){
   
 	newX <- model.matrix(.f.caret,  newX)
   
-	fitElastic <- glmnet(x = X, y = Y, family = "binomial", alpha = elasticnet$bestTune$alpha, lambda = elasticnet$bestTune$lambda, penalty.factor = c(0, rep(1, .l-1)) )
-  
+	if(keep==TRUE) {
+	fitElastic <- glmnet(x = X, y = Y, family = "binomial", alpha = elasticnet$bestTune$alpha, lambda = elasticnet$bestTune$lambda, penalty.factor = c(0, rep(1, .l-1)) ) }
+	
+	if(keep==FALSE) {
+	  fitElastic <- glmnet(x = X, y = Y, family = "binomial", alpha = elasticnet$bestTune$alpha, lambda = elasticnet$bestTune$lambda ) }
+	
 	pred <- predict(fitElastic, newx = newX, type = "response")
 	fit <- list(object = fitElastic)
 	class(fit) <- "SL.elasticnet.caret"
@@ -605,8 +646,12 @@ bsim <- function(){
   
 	newX <-  model.matrix(.f.caret,  newX)
   
-	fitLasso <- glmnet(x = X, y = Y, family = "binomial", alpha = 1,  lambda = lasso$bestTune$lambda,  penalty.factor = c(0, rep(1, .l-1)))
-  
+	if(keep==TRUE) {
+	fitLasso <- glmnet(x = X, y = Y, family = "binomial", alpha = 1,  lambda = lasso$bestTune$lambda,  penalty.factor = c(0, rep(1, .l-1))) }
+	
+	if(keep==FALSE) {
+	  fitLasso <- glmnet(x = X, y = Y, family = "binomial", alpha = 1,  lambda = lasso$bestTune$lambda) }
+	
 	pred <- predict(fitLasso, newx = newX, type = "response")
 	fit <- list(object = fitLasso)
 	class(fit) <- "SL.lasso.caret"

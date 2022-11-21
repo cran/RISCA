@@ -89,7 +89,7 @@ To estimate the marginal effect of a binary exposure, the \code{weights} may be 
 }
 
 \references{
-Huszti et al. Relative survival multistate Markov model. Stat Med. 10;31(3):269-86, 2012. <DOI: 10.1002/sim.4392>
+Huszti et al. Relative survival multistate Markov model. Stat Med. 10;31(3):269-86, 2012. <DOI: 10.1002/sim.4392>.
 
 Gillaizeau et al. A multistate additive relative survival semi-Markov model. Stat Methods Med Res. 26(4):1700-1711, 2017. <doi: 10.1177/ 0962280215586456>. 
 
@@ -97,7 +97,7 @@ Gillaizeau et al. Inverse Probability Weighting to control confounding in an ill
 }
 
 \author{
-Yohann Foucher <Yohann.Foucher@univ-nantes.fr>
+Yohann Foucher <Yohann.Foucher@univ-poitiers.fr>
 
 Florence Gillaizeau <Florence.Gillaizeau@univ-nantes.fr>
 }

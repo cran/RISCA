@@ -24,13 +24,12 @@ min.y=0, max.y=1, grid.lty=NULL)
   \item{grid.lty}{A character or (integer) numeric with the line type of the grid lines. The default is NULL for no grid.}
 }
 \author{
-Yohann Foucher <Yohann.Foucher@univ-nantes.fr>
+Yohann Foucher <Yohann.Foucher@univ-poitiers.fr>
 
 Florent Le Borgne <fleborgne@idbc.fr>
 }
 
 \examples{
-
 data(dataDIVAT2)
 
 res.km <- ipw.survival(times=dataDIVAT2$times, failures=dataDIVAT2$failures,

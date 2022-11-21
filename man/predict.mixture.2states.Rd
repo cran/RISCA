@@ -30,11 +30,11 @@ The covariates has to be identical than the ones included in the mixture model d
 }
 
 \references{
-Trebern-Launay K, Kessler M, Bayat-Makoei S, Querard AH, Briancon S, Giral M, Foucher Y. Horizontal mixture model for competing risks: a method used in waitlisted renal transplant candidates. European Journal of Epidemiology. 33(3):275-286, 2018. <doi: 10.1007/s10654-017-0322-3>.
+Trebern-Launay et al. Horizontal mixture model for competing risks: a method used in waitlisted renal transplant candidates. European Journal of Epidemiology. 33(3):275-286, 2018. <doi: 10.1007/s10654-017-0322-3>.
 }
 
 \author{
-Yohann Foucher <Yohann.Foucher@univ-nantes.fr>
+Yohann Foucher <Yohann.Foucher@univ-poitiers.fr>
 }
 
 \examples{

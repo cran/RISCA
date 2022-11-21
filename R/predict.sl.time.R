@@ -9,7 +9,7 @@ predict.sl.time <-function(object, ..., newdata=NULL, newtimes=NULL){
   FitVA <- vector("list", M+1)
   
   # names(FitVA) <- c(object$method, "sl")
-  names(FitVA)<-c(names(object$model) ,"sl")#CS changement quand keep.pred ==FALSE
+  names(FitVA)<-c(names(object$model) ,"sl") # CS changement quand keep.pred ==FALSE
 
   for (i in 1:M) { FitVA[[i]] <- predict(object$models[[i]], newdata=newdata, newtimes=newtimes)$predictions }
   

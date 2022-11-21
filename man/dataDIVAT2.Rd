@@ -24,7 +24,7 @@ A data frame with the 4 following variables:
 Le Borgne F, Giraudeau B, Querard AH, Giral M and Foucher Y. Comparisons of the performances of different statistical tests for time-to-event analysis with confounding factors: practical illustrations in kidney transplantation. Statistics in medicine. 30;35(7):1103-16, 2016. <doi:10.1002/ sim.6777>
 }
 
-\source{ URL: www.divat.fr }
+\source{URL: www.divat.fr}
 
 \examples{
 

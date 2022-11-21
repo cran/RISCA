@@ -72,7 +72,7 @@ Huszti et al. Relative survival multistate Markov model. Stat Med. 10;31(3):269-
 Gillaizeau et al. Inverse Probability Weighting to control confounding in an illness-death model for interval-censored data. Stat Med. 37(8):1245-1258, 2018. <doi: 10.1002/sim.7550>.
 }
 \author{
-Yohann Foucher <Yohann.Foucher@univ-nantes.fr>
+Yohann Foucher <Yohann.Foucher@univ-poitiers.fr>
 
 Florence Gillaizeau <Florence.Gillaizeau@univ-nantes.fr>
 }

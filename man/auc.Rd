@@ -19,11 +19,10 @@ auc(sens, spec)
 This function computes the area under ROC curve using the trapezoidal rule from two vectors of sensitivities and specificities. The value of the area is directly returned.
 }
 \author{
-Y. Foucher <Yohann.Foucher@univ-nantes.fr>
+Y. Foucher <Yohann.Foucher@univ-poitiers.fr>
 }
 
 \examples{
-
 se.temp <- c(0, 0.5, 0.5, 1)
 sp.temp <- c(1, 0.5, 0.5, 0)
 auc(se.temp, sp.temp)

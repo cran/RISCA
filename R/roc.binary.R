@@ -90,7 +90,9 @@ chaine <- paste(chaine,"))/sd(lm.0$residuals)",sep="")
 
 .auc <- auc(.tab$se, .tab$sp)
 
-.obj <- list(table=.tab[,c("se", "sp")], auc = .auc)
+.tab$J <- .tab$sp + .tab$se - 1
+
+.obj <- list(table=.tab[,c("se", "sp", "J")], auc = .auc)
 
 class(.obj) <- "rocrisca"
 

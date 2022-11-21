@@ -29,28 +29,18 @@ roc.net(times, failures, variable, p.age, p.sex, p.year,
 This function computes net time-dependent ROC curve with right-censored data using estimator defined by Pohar-Perm et al. (2012) and the k-nearest neighbor's (knn) estimator. The aim is to evaluate the capacity of a variable (measured at the baseline) to predict the excess of mortality of a studied population compared to the general population mortality. Using the knn estimator ensures a monotone and increasing ROC curve, but the computation time may be long. This approach may thus be avoided if the sample size is large because of computing time.
 }
 \value{
-\item{table}{This data frame presents the sensitivities and specificities associated with the cut-off values. One can observe NA if the value cannot be computed.}
+\item{table}{This data frame presents the sensitivities and specificities associated with the cut-off values. One can observe NA if the value cannot be computed. \code{J} represents the Youden index.}
 \item{auc}{The area under the time-dependent ROC curve for a prognostic up to prognostic time.}
 \item{missing}{Number of deleted observations due to missing data.}
 \item{warning}{This message indicates possible difficulties in the computation of the net ROC curve, for instance if the net survival was not lower or equal1 to 1 for particular cut-off values or times.}
 }
 \references{
-Pohar M., Stare J., Esteve J. (2012) On Estimation in Relative Survival. Biometrics, 68, 113-120. <doi:10.1111/ j.1541-0420.2011.01640.x>
-
-Lorent M., Giral M., Foucher Y. (2013) Net time-dependent ROC curves: a solution for evaluating the accuracy of a marker to predict disease-related mortality. Statistics in Medicine, 33, 2379-89. <doi:10.1002/sim.6079>
+Lorent et al. Net time-dependent ROC curves: a solution for evaluating the accuracy of a marker to predict disease-related mortality. Statistics in Medicine, 33, 2379-89. 2013. <doi:10.1002/sim.6079>
 }
 \author{
-Y. Foucher <Yohann.Foucher@univ-nantes.fr>
+Y. Foucher <Yohann.Foucher@univ-poitiers.fr>
 }
-%\note{
-%%  ~~further notes~~
-%}
 
-%% ~Make other sections like Warning with \section{Warning }{....} ~
-
-%\seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
-%}
 \examples{
 
 # import the observed data

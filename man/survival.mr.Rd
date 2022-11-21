@@ -32,10 +32,10 @@ We proposed here an adaptation of a multiplicative-regression model for relative
 \item{upper95.coef}{A numerical vector containing the upper bounds of the 95\% confidence intervals.}
 }
 \references{
-K. Trebern-Launay, M. Giral, J. Dantal and Y. Foucher. Comparison of the risk factors effects between two populations: two alternative approaches illustrated by the analysis of first and second kidney transplant recipients. BMC Med Res Methodol. 2013 Aug 6;13:102. <doi: 10.1186/1471-2288-13-102>
+K. Trebern-Launay et al. Comparison of the risk factors effects between two populations: two alternative approaches illustrated by the analysis of first and second kidney transplant recipients. BMC Med Res Methodol. 2013 Aug 6;13:102. <doi: 10.1186/1471-2288-13-102>.
 }
 \author{
-Y. Foucher <Yohann.Foucher@univ-nantes.fr>
+Y. Foucher <Yohann.Foucher@univ-poitiers.fr>
 
 K. Trebern-Launay <katygre@yahoo.fr>
 }

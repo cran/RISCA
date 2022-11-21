@@ -57,8 +57,9 @@ if(dim(.tab.res.temp)[1]>2){
 .auc <- auc(.tab.res.temp$se, 1-.tab.res.temp$sp1)
 }else{.auc<-NA}
 
+.tab$J <- .tab$sp + .tab$se - 1
 
-.obj <- list(table=.tab[,c("cut.off", "se", "sp")], auc = .auc)
+.obj <- list(table=.tab[,c("cut.off", "se", "sp", "J")], auc = .auc)
 
 class(.obj) <- "rocrisca"
 

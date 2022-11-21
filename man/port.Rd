@@ -36,7 +36,7 @@ The \code{port} function returns a characters string summarising all the subgrou
 }
 
 \references{
-Danelian G, Foucher Y, Leger M, Le Borgne F, and Chatton A. Identification of positivity violations' using regression trees: The PoRT algorithm. Manuscript submitted. 2022.
+Danelian et al. Identification of positivity violations' using regression trees: The PoRT algorithm. Manuscript submitted. 2022.
 }
 
 \author{

@@ -25,12 +25,12 @@ A data frame with 106 observations for the 8 following variables:
 \details{
 The immunology and nephrology department of the Nantes University hospital constituted a data bank with the monitoring of medical records for kidney and/or pancreas transplant recipients. Here, we considered a subpopulation of 4195 adult patients and who had received a first kidney graft between January 1996 and Jun 2008. Five centers participated. A total of 511 graft failures were observed (346 returns to dialysis and 165 deaths with a functional kidney). Based on this database, we constructed an aggregated dataset to perform a meta-analysis on 5 published monocentric studies. The medical objective was to evaluate whether 1-year serum creatinine (Cr) is a good predictive marker of graft failure. Cr is a breakdown product and is removed from the body by the kidneys. If kidney function is abnormal, blood Cr levels increase.
 }
-\source{
-URL: www.divat.fr
-}
+\source{URL: www.divat.fr}
+
 \references{
 Combescure et al. A literature-based approach to evaluate the predictive capacity of a marker using time-dependent Summary Receiver Operating Characteristics. Stat Methods Med Res, 25(2):674-85, 2016. <doi: 10.1177/ 0962280212464542>
 }
+
 \examples{
 data(dataDIVAT5)
 

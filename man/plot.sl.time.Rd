@@ -9,8 +9,8 @@ A calibration plot of a Super Learner obtained by the function \code{sl.time}.
 }
 
 \usage{
-\method{plot}{sl.time}(x, ..., col=1, lty=1, lwd=1, type="b", pch = 16, ylab=NULL, xlab=NULL, method="sl",
- n.groups=5, pro.time=NULL, newdata=NULL, times=NULL, failures=NULL)
+\method{plot}{sl.time}(x, ..., col, lty, lwd, type, pch, ylab, xlab, ylim, xlim, 
+   method, n.groups, pro.time, newdata, times, failures)
 }
 
 \arguments{
@@ -23,6 +23,8 @@ A calibration plot of a Super Learner obtained by the function \code{sl.time}.
   \item{pch}{A numeric value for plotting characters or symbols. The default is 16.}
   \item{xlab}{The label for the x axis. The default is "Predicted survival".}
   \item{ylab}{The label for the y axis. The default is "Observed survival".}
+  \item{xlim}{A vector with the x limits of the plot.}
+  \item{ylim}{A vector with the y limits of the plot.}
   \item{method}{A character string with the name of the algorithm included in the SL for wich the calibration plot is performed. The defaut is "sl" for the Super Learner.}
   \item{n.groups}{A numeric value with the number of groups by their class probabilities. The default is 5.}
   \item{pro.time}{The prognostic time at wich the calibration plot of the survival probabilities.}
@@ -33,7 +35,7 @@ A calibration plot of a Super Learner obtained by the function \code{sl.time}.
 
 
 \author{
-Yohann Foucher <Yohann.Foucher@univ-nantes.fr>
+Yohann Foucher <Yohann.Foucher@univ-poitiers.fr>
 
 Camille Sabathe <camille.sabathe@univ-nantes.fr>
 }
@@ -42,18 +44,15 @@ Camille Sabathe <camille.sabathe@univ-nantes.fr>
 
 data(dataDIVAT2)
 
-dataDIVAT2$train <- 1*rbinom(n=dim(dataDIVAT2)[1], size = 1, prob=1/3)
+#The outcome model base on a Super Learner from the first 150 individuals of the data base
+sl1<-sl.time( methods=c("aft.gamma", "ph.gompertz"),  metric="ibs",
+  data=dataDIVAT2[1:150,],  times="times", failures="failures", group="ecd",
+  cov.quanti=c("age"),  cov.quali=c("hla", "retransplant"), cv=3)
 
-# The training of the super learner with 2 models
-sl<-sl.time(method=c("aft.gamma", "ph.exponential"),
-  metric="ribs",  data=dataDIVAT2[dataDIVAT2$train==1,],
-  times="times", failures="failures", pro.time = 12,
-  cov.quanti=c("age"),  cov.quali=c("hla", "retransplant", "ecd"),  cv=3)
-
-# The calibration plot from the validation sample
-plot(sl, method="sl", n.groups=5, pro.time=12, col=2,
+# The calibration plot from the validation sample of150 patients
+plot(sl1, method="sl", n.groups=5, pro.time=12, col=2,
      xlab="Predicted 12-year survival", ylab="Observed 12-year survival",
-     newdata=dataDIVAT2[dataDIVAT2$train==0,], times="times", failures="failures")
+     newdata=dataDIVAT2[151:300,], times="times", failures="failures")
 
 }
 

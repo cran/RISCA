@@ -39,7 +39,7 @@ Venables, W. N. and Ripley, B. D. (2002) Modern Applied Statistics with S. Fourt
 }
 
 \author{
-Yohann Foucher <Yohann.Foucher@univ-nantes.fr>
+Yohann Foucher <Yohann.Foucher@univ-poitiers.fr>
 
 Camille Sabathe <camille.sabathe@univ-nantes.fr>
 }

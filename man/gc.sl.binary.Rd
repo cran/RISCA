@@ -7,7 +7,7 @@ Marginal Effect for Binary Outcome by Super Learned G-computation.
 This function allows to estimate the marginal effect of an exposure or a treatment by G-computation for binary outcomes, the outcome prediction (Q-model) is obtained by using a super learner.
 }
 \usage{
-gc.sl.binary(outcome, group, cov.quanti, cov.quali, data, effect,
+gc.sl.binary(outcome, group, cov.quanti, cov.quali, keep, data, effect,
  tuneLength, cv, iterations, n.cluster, cluster.type)
 }
 
@@ -15,7 +15,8 @@ gc.sl.binary(outcome, group, cov.quanti, cov.quali, data, effect,
   \item{outcome}{The name of the variable related to the binary outcome variable. This numeric variable must have only two levels: 0 and 1 (for instance: 0=healthy, 1=diseased).}
   \item{group}{The name of the variable related to the exposure/treatment variable. This numeric variable must have only two levels: 0 for the untreated/unexposed patients and 1 for the treated/exposed patients.}
   \item{cov.quanti}{The name(s) of the variable(s) related to the possible quantitative covariates. These variables must be numeric.}
-    \item{cov.quali}{The name(s) of the variable(s) related to the possible qualitative covariates. These variables must be numeric with two levels: 0 and 1. A complete disjunctive form must be used for covariates with more levels.}
+  \item{cov.quali}{The name(s) of the variable(s) related to the possible qualitative covariates. These variables must be numeric with two levels: 0 and 1. A complete disjunctive form must be used for covariates with more levels.}
+ \item{keep}{A logical value indicating whether variable related to the exposure/treatment is kept in the penalized regression (elasticnet or lasso). The default value is \code{TRUE}.}
   \item{data}{A data frame in which to look for the variable related to the outcome, the treatment/exposure and the covariables.}
  \item{effect}{The type of the marginal effect to be estimated. Three types are possible (see details): "ATE" (by default), "ATT" and "ATU".}
  \item{tuneLength}{It defines the total number of parameter combinations that will be evaluated in the machine learning techniques. The default value is 10.} 
@@ -40,11 +41,11 @@ The ATE corresponds to Average Treatment effect on the Entire population, i.e. t
 }
 
 \references{
-Chatton A et al. Improving Causal Inference Through the Super Learned G-computation. Manuscript submitted. 2020.
+Le Borgne et al. G-computation and machine learning for estimating the causal effects of binary exposure statuses on binary outcomes. Scientific Reports. 11(1):1435. 2021. <doi: 10.1038/s41598-021-81110-0>
 }
 
 \author{
-Yohann Foucher <Yohann.Foucher@univ-nantes.fr>
+Yohann Foucher <Yohann.Foucher@univ-poitiers.fr>
 }
 
 \examples{

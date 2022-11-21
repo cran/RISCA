@@ -22,9 +22,8 @@ A data frame with 5943 French kidney transplant recipients from the DIVAT cohort
 }
 }
 
-\source{
-URL: www.divat.fr
-}
+\source{URL: www.divat.fr}
+
 \examples{
 data(dataDIVAT1)
 

@@ -35,11 +35,11 @@ The ATE corresponds to Average Treatment effect on the Entire population, i.e. t
 }
 
 \references{
-Chatton A, Le Borgne F, Gillaizeau F, Leyrat C, Barbin L, Laplaud D, Leger M, Giraudeau B, Foucher Y. G-computation and propensity score-based methods with binary outcome: a comparative study to evaluate their performances for causal inference. Manuscript submitted. 2019.
+Le Borgne et al. G-computation and machine learning for estimating the causal effects of binary exposure statuses on binary outcomes. Scientific Reports. 11(1):1435. 2021. <doi: 10.1038/s41598-021-81110-0>
 }
 
 \author{
-Yohann Foucher <Yohann.Foucher@univ-nantes.fr>
+Yohann Foucher <Yohann.Foucher@univ-poitiers.fr>
 
 Arthur Chatton <Arthur.Chatton@etu.univ-nantes.fr>
 }

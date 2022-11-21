@@ -28,10 +28,10 @@ The maximum prognostic time is the minimum between the two last observed times o
 \item{auc.boot}{This data frame presents the different estimations of the area under the prognostic ROC curve for each of the \code{B} bootstrap samples: the lower bound, the pessimist, the non-informative, the optimist and the upper bound.}
 }
 \references{
-Combescure C, Perneger TV, Weber DC, Daures JP and Foucher Y. Prognostic ROC curves: a method for representing the overall discriminative capacity of binary markers with right-censored time-to-event endpoints. Epidemiology 2014 Jan;25(1):103-9. <doi: 10.1097/EDE.0000000000000004>
+Combescure C, Perneger TV, Weber DC, Daures JP and Foucher Y. Prognostic ROC curves: a method for representing the overall discriminative capacity of binary markers with right-censored time-to-event endpoints. Epidemiology 2014 Jan;25(1):103-9. <doi: 10.1097/EDE.0000000000000004>.
 }
 \author{
-Y. Foucher <Yohann.Foucher@univ-nantes.fr> and
+Y. Foucher <Yohann.Foucher@univ-poitiers.fr>
 
 C. Combescure <Christophe.Combescure@hcuge.ch>
 }

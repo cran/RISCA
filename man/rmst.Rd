@@ -19,7 +19,7 @@ RMST represents an interesting alternative to the hazard ratio in order to estim
 }
 
 \references{
-Royston R, Parmar M. Restricted mean survival time: an alternative to the hazard ratio for the design and analysis of randomized trials with a time-to-event outcome. BMC Medical Research Methodology 2013;13:152. <DOI: 10.1186/ 1471-2288-13-152>
+Royston and Parmar. Restricted mean survival time: an alternative to the hazard ratio for the design and analysis of randomized trials with a time-to-event outcome. BMC Medical Research Methodology 2013;13:152. <doi: 10.1186/ 1471-2288-13-152>.
 }
 
 \examples{

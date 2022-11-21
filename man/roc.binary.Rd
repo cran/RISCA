@@ -22,7 +22,7 @@ roc.binary(status, variable, confounders,  data, precision, estimator)
 This function computes confounder-adjusted ROC curve for uncensored data. We adapted the usual estimator by considering the individual probabilities to be diseased, given the possible confounding factors. The standardized and weighted ROC is obtained by both providing a variable under interest standardized according to the possible confounding factors and using "ipw" in the option \code{estimator}. The user can also use the estimator first proposed by Pepe and Cai (2004) which is based on placement values.
 }
 \value{
-\item{table}{This data frame presents the sensitivities and specificities.}
+\item{table}{This data frame presents the sensitivities and specificities. \code{J} represents the Youden index.}
 \item{auc}{The area under the ROC curve.}
 }
 \references{
@@ -30,20 +30,12 @@ Blanche et al. (2013) Review and comparison of roc curve estimators for a time-d
 
 Pepe and Cai. (2004) The analysis of placement values for evaluating discriminatory measures. Biometrics, 60(2), 528-35. <doi:10.1111/j.0006-341X.2004.00200.x>
 
-Le Borgne et al. Standardized and weighted time-dependent ROC curves to evaluate the intrinsic prognostic capacities of a marker by taking into account confounding factors. Manuscript submitted. Stat Methods Med Res. 27(11):3397-3410, 2018. <doi: 10.1177/ 0962280217702416.>
+Le Borgne et al. Standardized and weighted time-dependent ROC curves to evaluate the intrinsic prognostic capacities of a marker by taking into account confounding factors. Stat Methods Med Res. 27(11):3397-3410, 2018. <doi: 10.1177/ 0962280217702416>.
 }
 \author{
-Y. Foucher <Yohann.Foucher@univ-nantes.fr>
+Y. Foucher <Yohann.Foucher@univ-poitiers.fr>
 }
-%\note{
-%%  ~~further notes~~
-%}
 
-%% ~Make other sections like Warning with \section{Warning }{....} ~
-
-%\seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
-%}
 \examples{
 
 # import and attach the data example

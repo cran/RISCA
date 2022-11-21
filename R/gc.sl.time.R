@@ -17,7 +17,7 @@ gc.sl.time <- function(object, max.time=NULL, effect="ATE", estim.tune=TRUE,
   
   if(is.null(object$predictors$group)) { stop("The argument \"group\" in the sl.time function is NULL")  }
   
-  if(class(object) != "sl.time") { stop("The argument \"object\" needs to be obtain by the sl.time function") }
+  if(is(object) != "sl.time") { stop("The argument \"object\" needs to be obtain by the sl.time function") }
   
   if( !is.null(methods) ) { if(min(methods %in% object$methods) == 0) stop("Only methods included in the sl.time object can be asked in the argument \"method\".") }
   

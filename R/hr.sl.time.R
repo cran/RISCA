@@ -14,7 +14,7 @@ hr.sl.time <- function(object, pro.time=NULL, iterations=1000,
   
   if(is.null(object$predictors$group)) { stop("The argument \"group\" in the sl.time function is NULL")  }
   
-  if(class(object) != "sl.time") { stop("The argument \"object\" needs to be obtain by the sl.time function") }
+  if(is(object) != "sl.time") { stop("The argument \"object\" needs to be obtain by the sl.time function") }
   
   mod <- unique(object$data[,object$predictors$group])
   if(length(mod) != 2 | ((mod[1] != 0 & mod[2] != 1) & (mod[1] != 1 & mod[2] != 0))){

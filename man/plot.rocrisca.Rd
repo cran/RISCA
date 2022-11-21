@@ -15,11 +15,8 @@ A plot of ROC curves is produced. In the RISCA package, it concerns the function
   \item{...}{Additional arguments affecting the plot.}
   \item{information}{A logical value indicating whether the non-information line is plotted. The default values is TRUE.}
 }
-\references{
-Le Borgne et al. Standardized and weighted time-dependent ROC curves to evaluate the intrinsic prognostic capacities of a marker by taking into account confounding factors. Manuscript submitted. Stat Methods Med Res. 27(11):3397-3410, 2018. <doi: 10.1177/ 0962280217702416.>
-}
 \author{
-Yohann Foucher <Yohann.Foucher@univ-nantes.fr>
+Yohann Foucher <Yohann.Foucher@univ-poitiers.fr>
 }
 
 \examples{

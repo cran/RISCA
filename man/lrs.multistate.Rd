@@ -23,7 +23,7 @@ lrs.multistate(model1, model0)
 }
 
 \author{
-Yohann Foucher <Yohann.Foucher@univ-nantes.fr>
+Yohann Foucher <Yohann.Foucher@univ-poitiers.fr>
 
 Florence Gillaizeau <Florence.Gillaizeau@univ-nantes.fr>
 }
@@ -68,7 +68,6 @@ m0
 
 lrs.multistate(model1=m1, model0=m0)
 }
-
 
 \keyword{Markov}
 \keyword{Semi-Markov}

@@ -141,7 +141,7 @@ sl.time <- function( methods=c("cox.lasso", "aft.ggamma"),
   
   if(sum(methods %in% "cox.lasso")==1){ #si une seule methode lasso, check si param.tune OK
     if(!(is.null(param.tune[[which(methods=="cox.lasso")]]))){
-      if(class(param.tune[[which(methods=="cox.lasso")]])!="list"){
+      if(!is.list(param.tune[[which(methods=="cox.lasso")]])){
         stop("Argument param.tune for cox.lasso need to be a list")
       }
       if(sum((names(param.tune[[which(methods=="cox.lasso")]])%in%"lambda"))==0){
@@ -159,7 +159,7 @@ sl.time <- function( methods=c("cox.lasso", "aft.ggamma"),
     }
     for (i in 1:sum(methods %in% "cox.lasso")){
       if(!(is.null(param.tune[[which(methods=="cox.lasso")[i]]]))){
-        if(class(param.tune[[which(methods=="cox.lasso")[i]]])!="list"){
+        if(!is.list(param.tune[[which(methods=="cox.lasso")[i]]])){
           stop(paste("Argument param.tune for the ",i,"th cox.lasso need to be a list"))
         }
         if(sum((names(param.tune[[which(methods=="cox.lasso")[i]]])%in%"lambda"))==0){
@@ -175,7 +175,7 @@ sl.time <- function( methods=c("cox.lasso", "aft.ggamma"),
   
   if(sum(methods %in% "cox.ridge")==1){ #si une seule methode lasso, check si param.tune OK
     if(!(is.null(param.tune[[which(methods=="cox.ridge")]]))){
-      if(class(param.tune[[which(methods=="cox.ridge")]])!="list"){
+      if(!is.list(param.tune[[which(methods=="cox.ridge")]])){
         stop("Argument param.tune for cox.ridge need to be a list")
       }
       if(sum((names(param.tune[[which(methods=="cox.ridge")]])%in%"lambda"))==0){
@@ -193,7 +193,7 @@ sl.time <- function( methods=c("cox.lasso", "aft.ggamma"),
     }
     for (i in 1:sum(methods %in% "cox.ridge")){
       if(!(is.null(param.tune[[which(methods=="cox.ridge")[i]]]))){
-        if(class(param.tune[[which(methods=="cox.ridge")[i]]])!="list"){
+        if(!is.list(param.tune[[which(methods=="cox.ridge")[i]]])){
           stop(paste("Argument param.tune for the ",i,"th cox.ridge need to be a list"))
         }
         if(sum((names(param.tune[[which(methods=="cox.ridge")[i]]])%in%"lambda"))==0){
@@ -209,7 +209,7 @@ sl.time <- function( methods=c("cox.lasso", "aft.ggamma"),
   
   if(sum(methods %in% "cox.en")==1){ #si une seule methode lasso, check si param.tune OK
     if(!(is.null(param.tune[[which(methods=="cox.en")]]))){
-      if(class(param.tune[[which(methods=="cox.en")]])!="list"){
+      if(!is.list(param.tune[[which(methods=="cox.en")]])){
         stop("Argument param.tune for cox.en need to be a list")
       }
       if(sum((names(param.tune[[which(methods=="cox.en")]])%in%"lambda"))==0){
@@ -237,7 +237,7 @@ sl.time <- function( methods=c("cox.lasso", "aft.ggamma"),
     }
     for (i in 1:sum(methods %in% "cox.en")){
       if(!(is.null(param.tune[[which(methods=="cox.en")[i]]]))){
-        if(class(param.tune[[which(methods=="cox.en")[i]]])!="list"){
+        if(!is.list(param.tune[[which(methods=="cox.en")[i]]])){
           stop(paste("Argument param.tune for the ",i,"th cox.en need to be a list"))
         }
         if(sum((names(param.tune[[which(methods=="cox.en")[i]]])%in%"lambda"))==0){
@@ -263,7 +263,7 @@ sl.time <- function( methods=c("cox.lasso", "aft.ggamma"),
   
   if(sum(methods %in% "cox.aic")==1){ 
     if(!(is.null(param.tune[[which(methods=="cox.aic")]]))){
-      if(class(param.tune[[which(methods=="cox.aic")]])!="list"){
+      if(!is.list(param.tune[[which(methods=="cox.aic")]])){
         stop("Argument param.tune for cox.aic need to be a list")
       }
       if(sum((names(param.tune[[which(methods=="cox.aic")]])%in%"final.model.cov"))==0){
@@ -299,7 +299,7 @@ sl.time <- function( methods=c("cox.lasso", "aft.ggamma"),
     }
     for (i in 1:sum(methods %in% "cox.aic")){
       if(!(is.null(param.tune[[which(methods=="cox.aic")[i]]]))){
-        if(class(param.tune[[which(methods=="cox.aic")[i]]])!="list"){
+        if(!is.list(param.tune[[which(methods=="cox.aic")[i]]])){
           stop(paste("Argument param.tune for the ",i,"th cox.aic need to be a list"))
         }
         if(sum((names(param.tune[[which(methods=="cox.aic")[i]]])%in%"finl.model.cov"))==0){
@@ -333,7 +333,7 @@ sl.time <- function( methods=c("cox.lasso", "aft.ggamma"),
   
   if(sum(methods %in% "rf.time")==1){ #si une seule methode lasso, check si param.tune OK
     if(!(is.null(param.tune[[which(methods=="rf.time")]]))){
-      if(class(param.tune[[which(methods=="rf.time")]])!="list"){
+      if(!is.list(param.tune[[which(methods=="rf.time")]])){
         stop("Argument param.tune for rf.time need to be a list")
       }
       if(sum((names(param.tune[[which(methods=="rf.time")]])%in%"nodesize"))==0){
@@ -364,7 +364,7 @@ sl.time <- function( methods=c("cox.lasso", "aft.ggamma"),
       stop("Tune parameters for rf.time methods need to be unique")
     }
     for (i in 1:sum(methods %in% "rf.time")){
-      if(class(param.tune[[which(methods=="rf.time")[i]]])!="list"){
+      if(!is.list(param.tune[[which(methods=="rf.time")[i]]])){
         stop(paste("Argument param.tune for the ",i,"th rf.time need to be a list"))
       }
       if(!(is.null(param.tune[[which(methods=="rf.time")[i]]]))){
@@ -395,7 +395,7 @@ sl.time <- function( methods=c("cox.lasso", "aft.ggamma"),
   
   if(sum(methods %in% "nnet.time")==1){ #si une seule methode lasso, check si param.tune OK
     if(!(is.null(param.tune[[which(methods=="nnet.time")]]))){
-      if(class(param.tune[[which(methods=="nnet.time")]])!="list"){
+      if(!is.list(param.tune[[which(methods=="nnet.time")]])){
         stop("Argument param.tune for nnet.time need to be a list")
       }
       if(sum((names(param.tune[[which(methods=="nnet.time")]])%in%"n.nodes"))==0){
@@ -434,7 +434,7 @@ sl.time <- function( methods=c("cox.lasso", "aft.ggamma"),
     }
     for (i in 1:sum(methods %in% "nnet.time")){
       if(!(is.null(param.tune[[which(methods=="nnet.time")[i]]]))){
-        if(class(param.tune[[which(methods=="nnet.time")[i]]])!="list"){
+        if(!is.list(param.tune[[which(methods=="nnet.time")[i]]])){
           stop(paste("Argument param.tune for the ",i,"th nnet.time need to be a list"))
         }
         if(sum((names(param.tune[[which(methods=="nnet.time")[i]]])%in%"n.nodes"))==0){
@@ -2076,6 +2076,7 @@ sl.time <- function( methods=c("cox.lasso", "aft.ggamma"),
   res<-list(times=time.pred,#
             predictions=temp.predictions,
             data=data.frame(times=data[,times], failures=data[,failures], data[, !(dimnames(data)[[2]] %in% c(times, failures))]),
+            outcomes=list(times=times, failures=failures),
             predictors=list(group=group, cov.quanti=cov.quanti, cov.quali=cov.quali), #
             ROC.precision=ROC.precision, #
             cv=cv, #

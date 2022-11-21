@@ -79,10 +79,12 @@ Loss Function \code{metric}:
 
 \references{
 Polley E and van der Laanet M. Super Learner In Prediction. http://biostats.bepress.com/ucbbiostat/paper266. 2010.
+
+Sabathe C and Foucher Y. Super Learner for survival prediction from censored data: Extension of the R package RISCA. Manuscript submitted. 2022. 
 }
 
 \author{
-Yohann Foucher <Yohann.Foucher@univ-nantes.fr>
+Yohann Foucher <Yohann.Foucher@univ-poitiers.fr>
 
 Camille Sabathe <camille.sabathe@univ-nantes.fr>
 }
@@ -91,17 +93,13 @@ Camille Sabathe <camille.sabathe@univ-nantes.fr>
 
 data(dataDIVAT2)
 
-dataDIVAT2$train <- 1*rbinom(n=dim(dataDIVAT2)[1], size = 1, prob=1/3)
-
-# The training of the super learner with 2 algorithms
-sl<-sl.time(
-  methods=c("cox.lasso", "aft.ggamma"), metric="ribs",
-  data=dataDIVAT2[dataDIVAT2$train==1,],  times="times",
-  failures="failures", pro.time = 12, cov.quanti=c("age"),
-  cov.quali=c("hla", "retransplant", "ecd"), cv=5)
-
+#The outcome model base on a Super Learner and the first 150 individuals of the data base
+sl1<-sl.time( methods=c("aft.gamma", "ph.gompertz"),  metric="ibs",
+  data=dataDIVAT2[1:150,],  times="times", failures="failures", group="ecd",
+  cov.quanti=c("age"),  cov.quali=c("hla", "retransplant"), cv=3)
+  
 # Individual prediction
-pred <- predict(sl, newdata=data.frame(age=c(52,52), hla=c(0,1), retransplant=c(1,1), ecd=c(0,1)))
+pred <- predict(sl1, newdata=data.frame(age=c(52,52), hla=c(0,1), retransplant=c(1,1), ecd=c(0,1)))
 
 plot(y=pred$predictions$sl[1,], x=pred$times, xlab="Time (years)", ylab="Predicted survival",
      col=1, type="l", lty=1, lwd=2, ylim=c(0,1))

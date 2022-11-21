@@ -22,7 +22,7 @@ A data frame with 4267 French kidney transplant recipients.
   }
 }
 
-\source{ URL: www.divat.fr }
+\source{URL: www.divat.fr}
 
 \references{
 Le Borgne et al. Standardized and weighted time-dependent ROC curves to evaluate the intrinsic prognostic capacities of a marker by taking into account confounding factors. Manuscript submitted. Stat Methods Med Res. 27(11):3397-3410, 2018. <doi: 10.1177/ 0962280217702416.>

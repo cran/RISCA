@@ -6,7 +6,7 @@ Tune Survival Random Forest Tree
 }
 
 \description{
-This function finds the optimal nodesize, mtry, and ntree parameters for a survival random forest tree
+This function finds the optimal nodesize, mtry, and ntree parameters for a survival random forest tree.
 }
 
 \usage{
@@ -41,7 +41,7 @@ Ishwaran H. and Kogalur U.B. (2007). Random survival forests for R, Rnews, 7(2):
 }
 
 \author{
-Yohann Foucher <Yohann.Foucher@univ-nantes.fr>
+Yohann Foucher <Yohann.Foucher@univ-poitiers.fr>
 
 Camille Sabathe <camille.sabathe@univ-nantes.fr>
 }

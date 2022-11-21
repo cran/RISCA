@@ -41,7 +41,7 @@ Dantan et al. Optimal threshold estimator of a prognostic marker by maximizing a
 \author{
 Etienne Dantan <Etienne.Dantan@univ-nantes.fr>
 
-Yohann Foucher <Yohann.Foucher@univ-nantes.fr>
+Yohann Foucher <Yohann.Foucher@univ-poitiers.fr>
 }
 
 \examples{

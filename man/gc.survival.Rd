@@ -40,11 +40,11 @@ The ATE corresponds to Average Treatment effect on the Entire population, i.e. t
 }
 
 \references{
-Chatton et al. G-computation versus inverse probability weighting for time-to-event analyses. Manuscript in progress. 2019. 
+Chatton et al. G-computation and doubly robust standardisation for continuous-time data: A comparison with inverse probability weighting. Stat Methods Med Res. 31(4):706-718. 2022. <doi: 10.1177/09622802211047345>. 
 }
 
 \author{
-Yohann Foucher <Yohann.Foucher@univ-nantes.fr>
+Yohann Foucher <Yohann.Foucher@univ-poitiers.fr>
 
 Arthur Chatton <Arthur.Chatton@etu.univ-nantes.fr>
 }

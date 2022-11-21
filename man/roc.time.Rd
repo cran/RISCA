@@ -24,26 +24,18 @@ roc.time(times, failures, variable, confounders, data,
 This function computes confounder-adjusted time-dependent ROC curve with right-censored data. We adapted the naive IPCW estimator as explained by Blanche, Dartigues and Jacqmin-Gadda (2013) by considering the probability of experiencing the event of interest before the fixed prognostic time, given the possible confounding factors.
 }
 \value{
-\item{table}{This data frame presents the sensitivities and specificities associated with the cut-off values.}
+\item{table}{This data frame presents the sensitivities and specificities associated with the cut-off values. \code{J} represents the Youden index.}
 \item{auc}{The area under the time-dependent ROC curve for a prognostic up to \code{pro.time}.}
 }
 \references{
 Blanche et al. (2013) Review and comparison of roc curve estimators for a time-dependent outcome with marker-dependent censoring. Biometrical Journal, 55, 687-704. <doi:10.1002/ bimj.201200045>
 
-Le Borgne F. et al. Standardized and weighted time-dependent ROC curves to evaluate the intrinsic prognostic capacities of a marker by taking into account confounding factors. Manuscript submitted. Stat Methods Med Res. 27(11):3397-3410, 2018. <doi: 10.1177/ 0962280217702416.>
+Le Borgne et al. Standardized and weighted time-dependent ROC curves to evaluate the intrinsic prognostic capacities of a marker by taking into account confounding factors. Stat Methods Med Res. 27(11):3397-3410, 2018. <doi: 10.1177/ 0962280217702416>.
 }
 \author{
-Y. Foucher <Yohann.Foucher@univ-nantes.fr>
+Y. Foucher <Yohann.Foucher@univ-poitiers.fr>
 }
-%\note{
-%%  ~~further notes~~
-%}
 
-%% ~Make other sections like Warning with \section{Warning }{....} ~
-
-%\seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
-%}
 \examples{
 # import and attach the data example
 data(dataDIVAT3)

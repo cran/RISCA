@@ -153,7 +153,9 @@ if (knn==TRUE) {
 
 .auc <- sum((.tab.res.temp$sp1[2:length(.tab.res.temp$sp1)] - .tab.res.temp$sp1[1:(length(.tab.res.temp$sp1)-1)]) * 0.5 * (.tab.res.temp$se[2:length(.tab.res.temp$sp1)] + .tab.res.temp$se[1:(length(.tab.res.temp$sp1)-1)]))
 
-.obj <- list(table=.tab.res[,c("cut.off", "se", "sp")], auc = .auc, missing = .n.na, warning = .warnings)
+.tab.res$J <- .tab.res$sp + .tab.res$se - 1
+
+.obj <- list(table=.tab.res[,c("cut.off", "se", "sp", "J")], auc = .auc, missing = .n.na, warning = .warnings)
 
 class(.obj) <- "rocrisca"
 

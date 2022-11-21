@@ -483,10 +483,12 @@ lower.tail = TRUE, log.p = FALSE),
 .tab <- rbind(c(NA, 0, 0), .tab, c(NA, 1, 1))
 .tab$sp <- 1 - .tab$sp1
 
+.tab$J <- .tab$sp + .tab$se - 1
+
 .obj <- list(
 nlme1 = nlme1,
 nlme2 = nlme2,
-table = .tab[,c("cut.off", "se", "sp")],
+table = .tab[,c("cut.off", "se", "sp", "J")],
 auc = .auc,
 data.marker = .eff,
 data.surv = .data )

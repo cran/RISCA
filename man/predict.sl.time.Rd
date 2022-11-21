@@ -26,7 +26,7 @@ Predict the survival of new observations based on an SL by unsing the \code{sl.t
 
 
 \author{
-Yohann Foucher <Yohann.Foucher@univ-nantes.fr>
+Yohann Foucher <Yohann.Foucher@univ-poitiers.fr>
 
 Camille Sabathe <camille.sabathe@univ-nantes.fr>
 }
@@ -35,15 +35,13 @@ Camille Sabathe <camille.sabathe@univ-nantes.fr>
 
 data(dataDIVAT2)
 
-dataDIVAT2$train <- 1*rbinom(n=dim(dataDIVAT2)[1], size = 1, prob=1/3)
-
-# The training of the super learner with 2 algorithms
-sl<-sl.time(method=c("cox.ridge", "aft.ggamma"),  metric="ribs",
-  data=dataDIVAT2[dataDIVAT2$train==1,],  times="times", failures="failures", pro.time = 12,
+# The training of the super learner from the first 150 individuals of the data base
+sl1<-sl.time(method=c("cox.ridge", "aft.ggamma"),  metric="ribs",
+  data=dataDIVAT2[1:150,],  times="times", failures="failures", pro.time = 12,
   cov.quanti=c("age"),  cov.quali=c("hla", "retransplant", "ecd"), cv=3)
 
 # Individual prediction for 2 new subjects
-pred <- predict(sl,
+pred <- predict(sl1,
   newdata=data.frame(age=c(52,52), hla=c(0,1), retransplant=c(1,1), ecd=c(0,1)))
 
 plot(y=pred$predictions$sl[1,], x=pred$times, xlab="Time (years)", ylab="Predicted survival",
