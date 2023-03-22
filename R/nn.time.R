@@ -1,5 +1,5 @@
 
-nnet.time <- function(times, failures, group=NULL, cov.quanti=NULL, cov.quali=NULL,
+nn.time <- function(times, failures, group=NULL, cov.quanti=NULL, cov.quali=NULL,
                       data, n.nodes, decay,
                       batch.size, epochs){
 
@@ -33,7 +33,7 @@ nnet.time <- function(times, failures, group=NULL, cov.quanti=NULL, cov.quali=NU
           data=data.frame(times=data[,times], failures=data[,failures],
           data[, !(dimnames(data)[[2]] %in% c(times, failures))]), times=.time, predictions=.pred)
 
-  class(.obj) <- "nnet.time"
+  class(.obj) <- "nn.time"
 
   return(.obj)
 }

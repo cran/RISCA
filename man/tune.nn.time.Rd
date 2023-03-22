@@ -1,5 +1,5 @@
-\name{tune.nnet.time}
-\alias{tune.nnet.time}
+\name{tune.nn.time}
+\alias{tune.nn.time}
 
 \title{
 Tune a 1-Layer Survival Neural Network
@@ -10,7 +10,7 @@ This function finds the optimal n.nodes, decay, batch.size, and epochs parameter
 }
 
 \usage{
-tune.nnet.time(times, failures, group, cov.quanti,
+tune.nn.time(times, failures, group, cov.quanti,
 cov.quali, data, cv, n.nodes, decay, batch.size, epochs)
 }
 
@@ -51,22 +51,22 @@ Camille Sabathe <camille.sabathe@univ-nantes.fr>
 
 # On a linux machine
 
-#Install Python 
+# Install Python 
 
-#sudo apt install python3-pip
+# sudo apt install python3-pip
 
-#Install Python Miniconda for CPU computaion on a linux machine
+# Install Python Miniconda for CPU computaion on a linux machine
 
-#Download the file from https://docs.conda.io/en/latest/miniconda.html#linux-installers
+# Download the file from https://docs.conda.io/en/latest/miniconda.html#linux-installers
 
-#chmod +x Miniconda3-latest-Linux-x86_64.sh 
-#./Miniconda3-latest-Linux-x86_64.sh 
-#conda create --name torch python=3.8
-#conda activate torch
-#conda install pytorch torchvision torchaudio cpuonly -c pytorch
-#conda install -c conda-forge pycox
+  # chmod +x Miniconda3-latest-Linux-x86_64.sh 
+  # ./Miniconda3-latest-Linux-x86_64.sh 
+  # conda create --name torch python=3.8
+  # conda activate torch
+  # conda install pytorch torchvision torchaudio cpuonly -c pytorch
+  # conda install -c conda-forge pycox
 
-#export PATH="/home/username/.local/bin:$PATH"
+# export PATH="/home/username/.local/bin:$PATH"
 
 # remotes::install_github("RaphaelS1/survivalmodels")
 # install_pycox(method = "auto",  conda = "auto",  pip = TRUE,  install_torch = TRUE )
@@ -74,26 +74,28 @@ Camille Sabathe <camille.sabathe@univ-nantes.fr>
 
 # use_condaenv(condaenv = "~/miniconda3/envs/torch", conda = "auto", required = FALSE)
 
-#data(dataDIVAT2)
+# data(dataDIVAT2)
 
 # The estimation of the hyperparameters
-#tune.model<-tune.nnet.time(times="times", failures="failures", data=dataDIVAT2[1:500,],
-#  cov.quanti=c("age"),  cov.quali=c("hla", "retransplant", "ecd"),
-#  cv=3, n.nodes=c(1, 2), decay=0, batch.size=256L, epochs=1L)
+
+# tune.model<-tune.nn.time(times="times", failures="failures", data=dataDIVAT2[1:500,],
+#    cov.quanti=c("age"),  cov.quali=c("hla", "retransplant", "ecd"),
+#    cv=3, n.nodes=c(1, 2), decay=0, batch.size=256L, epochs=1L)
 
 # the estimated nodesize value
-#tune.model$optimal
-#tune.model$results
+
+# tune.model$optimal
+# tune.model$results
 
 # The estimation of the training modelwith the corresponding lambda value
 
-#model<-nnet.time(times="times", failures="failures", data=dataDIVAT2,
-#  cov.quanti=c("age"),  cov.quali=c("hla", "retransplant", "ecd"),
-#  n.nodes=tune.model$optimal$n.nodes, decay=0, batch.size=256L, epochs=1L)
+# model<-nn.time(times="times", failures="failures", data=dataDIVAT2,
+#   cov.quanti=c("age"),  cov.quali=c("hla", "retransplant", "ecd"),
+#   n.nodes=tune.model$optimal$n.nodes, decay=0, batch.size=256L, epochs=1L)
 
 # The resulted predicted survival of the first subject of the training sample
-#plot(y=model$predictions[1,], x=model$times, xlab="Time (years)", ylab="Predicted survival",
-#     col=1, type="l", lty=1, lwd=2, ylim=c(0,1))
+# plot(y=model$predictions[1,], x=model$times, xlab="Time (years)", ylab="Predicted survival",
+#      col=1, type="l", lty=1, lwd=2, ylim=c(0,1))
 
 }
 

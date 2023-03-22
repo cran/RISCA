@@ -1,6 +1,6 @@
 
 
-predict.nnet.time <- function(object, ..., newdata=NULL, newtimes=NULL){
+predict.nn.time <- function(object, ..., newdata=NULL, newtimes=NULL){
   
   .times <- object$times
 

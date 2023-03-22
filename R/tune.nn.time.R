@@ -3,7 +3,7 @@
 # CAMILLE : JE NE COMPRENDS CETTE FONCTION, IL Y A DES ARGUMENTS "METRIC" et "CL" NON-UTILISES -> J'AI SIMPLIFIE  COMME LES AUTRES FONCTIONS "TUNE" 
 # CS : metric ne servait a rier 
 # CS : option CL non utilisee actuellement car fonction pas parallelisable actuellement 
-tune.nnet.time <- function(times, failures, group=NULL, 
+tune.nn.time <- function(times, failures, group=NULL, 
                            cov.quanti=NULL, cov.quali=NULL, 
                            data, cv=10, 
                            n.nodes,
@@ -15,18 +15,18 @@ tune.nnet.time <- function(times, failures, group=NULL,
   
   
   # CS ici pas besoin de faire un check si group ou cov.quanti ou cov.quali == NULL
-  data.nnet <- data[,c(times, failures, group, cov.quanti, cov.quali)]
+  data.nn <- data[,c(times, failures, group, cov.quanti, cov.quali)]
   
 
 # CS : a faire a chaque fois car fonction "manuelle" pour faire la CV 
-  sample_id <- sample(nrow(data.nnet))
-  folds <- cut(seq(1,nrow(data.nnet)), breaks=cv, labels=FALSE)
+  sample_id <- sample(nrow(data.nn))
+  folds <- cut(seq(1,nrow(data.nn)), breaks=cv, labels=FALSE)
   folds_id <- folds[sample_id]
-  data.nnet$folds <- folds_id
+  data.nn$folds <- folds_id
 
   
   .f  <- as.formula(paste("Surv(", times, ",", failures, ")", "~."))
-  .time <- sort(unique(data.nnet[,times]))
+  .time <- sort(unique(data.nn[,times]))
   .grid <-  expand.grid(n.nodes=n.nodes, decay=decay, batch.size=batch.size,
                         epochs=epochs)
   # .ibs <- rep(-99, dim(.grid)[1]) #a garder ?
@@ -39,13 +39,13 @@ tune.nnet.time <- function(times, failures, group=NULL,
   l<-1
   for (k in 1:cv){
     for (j in 1:dim(.grid)[1]){
-      .CVtune[[l]]<-list(train=data.nnet[data.nnet$folds!=k, ], valid=data.nnet[data.nnet$folds==k, ], grid=.grid[j,])
+      .CVtune[[l]]<-list(train=data.nn[data.nn$folds!=k, ], valid=data.nn[data.nn$folds==k, ], grid=.grid[j,])
       l=l+1
     }
   }
 
   # CS ici il faut bien garder l'option newtimes
-  nnet.time.par<-function(xx, times, failures, group, cov.quanti, cov.quali,newtimes){
+  nn.time.par<-function(xx, times, failures, group, cov.quanti, cov.quali,newtimes){
     
     n.nodes=xx$grid$n.nodes
     decay=xx$grid$decay
@@ -116,23 +116,23 @@ tune.nnet.time <- function(times, failures, group=NULL,
     
     # .obj <- list(times=.time, model=.deepsurv, group=group, cov.quanti=cov.quanti, cov.quali=cov.quali, predictions=.pred)
     #
-    # class(.obj) <- "nnet.time"
+    # class(.obj) <- "nn.time"
     
     return(.pred)
   }
   
   # if(parallel==T){
-  #    .preFIT<-parLapply(cl,.CVtune, nnet.time.par,times=times, failures=failures, group=group,
+  #    .preFIT<-parLapply(cl,.CVtune, nn.time.par,times=times, failures=failures, group=group,
   #                   cov.quanti=cov.quanti, cov.quali=cov.quali,newtimes=.time, seed=seed,chunk.size =1)
   #
   # }
   # else{
   .preFIT<-list()
   for (i in 1:length(.CVtune)){
-    .preFIT[[i]]<-nnet.time.par(.CVtune[[i]], times=times, failures=failures, group=group,
+    .preFIT[[i]]<-nn.time.par(.CVtune[[i]], times=times, failures=failures, group=group,
                                 cov.quanti=cov.quanti, cov.quali=cov.quali,newtimes=.time)
   }
-    .preFIT<-lapply(.CVtune, nnet.time.par, times=times, failures=failures, group=group,
+    .preFIT<-lapply(.CVtune, nn.time.par, times=times, failures=failures, group=group,
                  cov.quanti=cov.quanti, cov.quali=cov.quali,newtimes=.time)
 
   # }
@@ -144,12 +144,12 @@ tune.nnet.time <- function(times, failures, group=NULL,
   for (k in 1:cv){
     for (j in 1:dim(.grid)[1]){
       # print(j)
-      .FitCV[[j]][data.nnet$folds==k,] <- .preFIT[[l]]
+      .FitCV[[j]][data.nn$folds==k,] <- .preFIT[[l]]
       l<-l+1
     }
   }
 
-  nnet.best.measure<-  function(prediction.matrix, times, failures, data){ 
+  nn.best.measure<-  function(prediction.matrix, times, failures, data){ 
   # CS : suppression des premieres lignes inutiles
     # rajout d'une boucle qui controle que prediction de la survie !=0 pour eviter les pb avec le log par la suite
     for (i in 1:dim(prediction.matrix)[1]){
@@ -185,12 +185,12 @@ tune.nnet.time <- function(times, failures, group=NULL,
   
   
  # if(parallel==T){
- #   .measure<-parSapply(cl,.FitCV,nnet.best.measure,times=times, failures=failures,data=data,
+ #   .measure<-parSapply(cl,.FitCV,nn.best.measure,times=times, failures=failures,data=data,
   #                  chunk.size = 1)
 
  # }
  # else{
-    .measure<-sapply(.FitCV, nnet.best.measure, times=times, failures=failures, data=data.nnet)
+    .measure<-sapply(.FitCV, nn.best.measure, times=times, failures=failures, data=data.nn)
 
  # }
 

@@ -16,7 +16,7 @@ predict.sl.time <-function(object, ..., newdata=NULL, newtimes=NULL){
   FitVA[[M+1]] <- matrix(0, nrow=dim(FitVA[[1]])[1], ncol=dim(FitVA[[1]])[2])
   
 
-  if(object$metric!="loglik.td"){
+  if(object$metric$metric!="loglik.td"){
     w.sl=object$weights$values
     for (i in 1:M) { FitVA[[M+1]]  <- FitVA[[M+1]] + w.sl[i]*FitVA[[i]] }
     if(is.null(newtimes)) {time.pred <- object$times} else {time.pred <- newtimes}

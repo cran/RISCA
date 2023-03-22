@@ -1,6 +1,7 @@
 
 
-plot.sl.time <- function(x, ..., col=1, lty=1, lwd=1, type="b", pch = 16, ylab=NULL, xlab=NULL, ylim=NULL, xlim=NULL, method="sl", n.groups=5, pro.time=NULL, 
+plot.sl.time <- function(x, ..., col=1, lty=1, lwd=1, type="b", pch = 16, ylab=NULL, xlab=NULL,
+                         ylim=NULL, xlim=NULL, method="sl", n.groups=5, pro.time=NULL, 
                          newdata=NULL,times=NULL, failures=NULL)
 {
   pred.times <- x$times

@@ -49,7 +49,7 @@ Methods:
   \code{"cox.ridge"} \tab   Ridge Cox \tab glmnet \tab PH \cr 
   \code{"rf.time"} \tab Survival Random Forest \tab
   randomForestSRC \tab RF \cr 
-  \code{"nnet.time"} \tab Neural Network  \tab survivalmodels \tab
+  \code{"nn.time"} \tab Neural Network  \tab survivalmodels \tab
   PH \cr }
 
 Loss Function \code{metric}:
@@ -72,8 +72,8 @@ Loss Function \code{metric}:
 \item{cv}{The number of splits for cross-validation.}
 \item{pro.time}{The maximum delay for which the capacity of the variable is evaluated.}
 \item{models}{A list with the estimated models/algorithms included in the SL.}
-\item{weights}{A list composed by two vector: the regressions \code{coefficients} of the logistic multinomial regression and the resulting weights' \code{values}}
-\item{metric}{The loss function used to estimate the weights of the algorithms in the SL.}
+\item{weights}{A list composed by two vectors: the regressions \code{coefficients} of the logistic multinomial regression and the resulting weights' \code{values}}
+\item{metric}{A list composed by two vectors: the loss function used to estimate the weights of the algorithms in the SL and its value.}
 \item{param.tune}{The estimated tunning parameters.}
 }
 

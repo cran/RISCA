@@ -2,12 +2,14 @@
 survival.summary.strata<-function(study, time, n.risk, surv.rate, confidence, strata)
 {
 
-.data <- data.frame(study, time, n.risk, surv.rate)
+#.data <- data.frame(study, time, n.risk, surv.rate)
+.data <- data.frame(study, time, n.risk, surv.rate, strata)
 .data <- .data[order(study, time),]
 study <- .data$study
 time <- .data$time
 n.risk <- .data$n.risk
 surv.rate <- .data$surv.rate
+strata <- factor(.data$strata)
 
 #### Determination of the time horizon for which each stratum contains at least two studies
 
@@ -41,7 +43,7 @@ p.value=NA))
 
 else {
 
-	strata<-factor(strata)
+	#strata<-factor(strata)
 
 	Temp<-table(time, strata)
 	TimeBound<-max(sort(unique(time))[apply(Temp,1,min)>=2])

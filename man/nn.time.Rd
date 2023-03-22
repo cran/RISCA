@@ -1,5 +1,5 @@
-\name{nnet.time}
-\alias{nnet.time}
+\name{nn.time}
+\alias{nn.time}
 
 \title{
 Library of the Super Learner for Survival Neural Network
@@ -10,7 +10,7 @@ Fit a 1-layer neural network based on the partial likelihood from a Cox proporti
 }
 
 \usage{
-nnet.time(times, failures, group, cov.quanti, cov.quali,
+nn.time(times, failures, group, cov.quanti, cov.quali,
 data, n.nodes, decay, batch.size, epochs)
 }
 
@@ -56,22 +56,22 @@ Camille Sabathe <camille.sabathe@univ-nantes.fr>
 
 # On a linux machine
 
-#Install Python 
+# Install Python 
 
-#sudo apt install python3-pip
+# sudo apt install python3-pip
 
-#Install Python Miniconda for CPU computaion on a linux machine
+# Install Python Miniconda for CPU computaion on a linux machine
 
-#Download the file from https://docs.conda.io/en/latest/miniconda.html#linux-installers
+# Download the file from https://docs.conda.io/en/latest/miniconda.html#linux-installers
 
-#chmod +x Miniconda3-latest-Linux-x86_64.sh 
-#./Miniconda3-latest-Linux-x86_64.sh 
-#conda create --name torch python=3.8
-#conda activate torch
-#conda install pytorch torchvision torchaudio cpuonly -c pytorch
-#conda install -c conda-forge pycox
+  # chmod +x Miniconda3-latest-Linux-x86_64.sh 
+  # ./Miniconda3-latest-Linux-x86_64.sh 
+  # conda create --name torch python=3.8
+  # conda activate torch
+  # conda install pytorch torchvision torchaudio cpuonly -c pytorch
+  # conda install -c conda-forge pycox
 
-#export PATH="/home/username/.local/bin:$PATH"
+# export PATH="/home/username/.local/bin:$PATH"
 
 # remotes::install_github("RaphaelS1/survivalmodels")
 # install_pycox(method = "auto",  conda = "auto",  pip = TRUE,  install_torch = TRUE )
@@ -79,17 +79,18 @@ Camille Sabathe <camille.sabathe@univ-nantes.fr>
 
 # use_condaenv(condaenv = "~/miniconda3/envs/torch", conda = "auto", required = FALSE)
 
-#data(dataDIVAT2)
+# data(dataDIVAT2)
 
 # The estimation of the model from the first 500 individuals
-#model<-nnet.time(times="times", failures="failures", data=dataDIVAT2[1:500,],
+
+# model<-nn.time(times="times", failures="failures", data=dataDIVAT2[1:500,],
 #  cov.quanti=c("age"),  cov.quali=c("hla", "retransplant", "ecd"), n.nodes=5, decay=.01,
 #                 batch.size=256L, epochs = 1L)
                  
 # The predicted survival of the first subject of the training sample
-#plot(y=model$predictions[1,], x=model$times, xlab="Time (years)", ylab="Predicted survival",
+# plot(y=model$predictions[1,], x=model$times, xlab="Time (years)", ylab="Predicted survival",
 #     col=1, type="l", lty=1, lwd=2, ylim=c(0,1))
-     
+
 }
 
 \keyword{Super Learner Library}

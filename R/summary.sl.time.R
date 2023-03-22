@@ -24,7 +24,7 @@ summary.sl.time <- function(object, ..., method="sl", pro.time=NULL, newdata=NUL
   
   else
   {
-    .pred <- predict(object, newdata=newdata)
+    .pred <- predict(object,, newdata=newdata)
     if(is.null(times)) {times <- object$outcomes$times; failures <- object$outcomes$failures}
     
     return(data.frame(

@@ -1,13 +1,13 @@
 Package: RISCA
 Type: Package
 Title: Causal Inference and Prediction in Cohort-Based Analyses
-Version: 1.0.3
-Depends: R (>= 3.5.0), splines, survival, relsurv, reticulate
+Version: 1.0.4
+Depends: R (>= 4.2.0), splines, survival, relsurv, reticulate, tune
 Imports: date, graphics, nlme, MASS, mvtnorm, statmod, parallel,
         doParallel, foreach, nnet, kernlab, glmnet, caret,
-        SuperLearner, zoo, flexsurv, randomForestSRC, survivalmodels,
-        prodlim, hdnom, glmnetUtils, dplyr, mosaic, mosaicCalc,
-        cubature, timeROC, rpart, methods
+        SuperLearner, flexsurv, randomForestSRC, survivalmodels,
+        prodlim, hdnom, glmnetUtils, mosaic, mosaicCalc, cubature,
+        timeROC, rpart, methods
 Authors@R: c(
     person("Yohann", "Foucher", email = "Yohann.Foucher@univ-poitiers.fr", role = c("aut", "cre"), comment = 
     c(ORCID = "0000-0003-0330-7457")),
@@ -23,6 +23,6 @@ Author: Yohann Foucher [aut, cre] (<https://orcid.org/0000-0003-0330-7457>),
   Arthur Chatton [aut],
   Camille Sabathe [aut]
 Maintainer: Yohann Foucher <Yohann.Foucher@univ-poitiers.fr>
-Packaged: 2022-11-21 20:09:49 UTC; foucher-y
+Packaged: 2023-03-22 18:16:40 UTC; foucher-y
 Repository: CRAN
-Date/Publication: 2022-11-21 22:00:13 UTC
+Date/Publication: 2023-03-22 18:50:02 UTC

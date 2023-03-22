@@ -393,77 +393,77 @@ sl.time <- function( methods=c("cox.lasso", "aft.ggamma"),
     }
   }
   
-  if(sum(methods %in% "nnet.time")==1){ #si une seule methode lasso, check si param.tune OK
-    if(!(is.null(param.tune[[which(methods=="nnet.time")]]))){
-      if(!is.list(param.tune[[which(methods=="nnet.time")]])){
-        stop("Argument param.tune for nnet.time need to be a list")
+  if(sum(methods %in% "nn.time")==1){ #si une seule methode lasso, check si param.tune OK
+    if(!(is.null(param.tune[[which(methods=="nn.time")]]))){
+      if(!is.list(param.tune[[which(methods=="nn.time")]])){
+        stop("Argument param.tune for nn.time need to be a list")
       }
-      if(sum((names(param.tune[[which(methods=="nnet.time")]])%in%"n.nodes"))==0){
-        stop("Tune parameters for nnet.time need to have n.nodes")
+      if(sum((names(param.tune[[which(methods=="nn.time")]])%in%"n.nodes"))==0){
+        stop("Tune parameters for nn.time need to have n.nodes")
       }
-      if(sum((names(param.tune[[which(methods=="nnet.time")]])%in%"decay"))==0){
-        stop("Tune parameters for nnet.time need to have decay")
+      if(sum((names(param.tune[[which(methods=="nn.time")]])%in%"decay"))==0){
+        stop("Tune parameters for nn.time need to have decay")
       }
-      if(sum((names(param.tune[[which(methods=="nnet.time")]])%in%"batch.size"))==0){
-        stop("Tune parameters for nnet.time need to have batch.size")
+      if(sum((names(param.tune[[which(methods=="nn.time")]])%in%"batch.size"))==0){
+        stop("Tune parameters for nn.time need to have batch.size")
       }
-      if(sum((names(param.tune[[which(methods=="nnet.time")]])%in%"epochs"))==0){
-        stop("Tune parameters for nnet.time need to have epochs")
+      if(sum((names(param.tune[[which(methods=="nn.time")]])%in%"epochs"))==0){
+        stop("Tune parameters for nn.time need to have epochs")
       }
-      if(!(is.numeric(param.tune[[which(methods=="nnet.time")]]$n.nodes)|
-           is.null(param.tune[[which(methods=="nnet.time")]]$n.nodes))){
-        stop("n.nodes tune parameters for nnet.time need to be a scalar, a vector or NULL")
+      if(!(is.numeric(param.tune[[which(methods=="nn.time")]]$n.nodes)|
+           is.null(param.tune[[which(methods=="nn.time")]]$n.nodes))){
+        stop("n.nodes tune parameters for nn.time need to be a scalar, a vector or NULL")
       }
-      if(!(is.numeric(param.tune[[which(methods=="nnet.time")]]$decay)|
-           is.null(param.tune[[which(methods=="nnet.time")]]$decay))){
-        stop("decay tune parameters for nnet.time need to be a scalar, a vector or NULL")
+      if(!(is.numeric(param.tune[[which(methods=="nn.time")]]$decay)|
+           is.null(param.tune[[which(methods=="nn.time")]]$decay))){
+        stop("decay tune parameters for nn.time need to be a scalar, a vector or NULL")
       }
-      if(!(is.numeric(param.tune[[which(methods=="nnet.time")]]$batch.size)|
-           is.null(param.tune[[which(methods=="nnet.time")]]$batch.size))){
-        stop("batch.size tune parameters for nnet.time need to be a scalar, a vector or NULL")
+      if(!(is.numeric(param.tune[[which(methods=="nn.time")]]$batch.size)|
+           is.null(param.tune[[which(methods=="nn.time")]]$batch.size))){
+        stop("batch.size tune parameters for nn.time need to be a scalar, a vector or NULL")
       }
-      if(!(is.numeric(param.tune[[which(methods=="nnet.time")]]$epochs)|
-           is.null(param.tune[[which(methods=="nnet.time")]]$epochs))){
-        stop("epochs tune parameters for nnet.time need to be a scalar, a vector or NULL")
+      if(!(is.numeric(param.tune[[which(methods=="nn.time")]]$epochs)|
+           is.null(param.tune[[which(methods=="nn.time")]]$epochs))){
+        stop("epochs tune parameters for nn.time need to be a scalar, a vector or NULL")
       }
     }
   }
-  if(sum(methods %in% "nnet.time")>=2){ #si plusieurs methodes, check si unique puis check comme une methode pour chacune
-    if(length(param.tune[which(methods=="nnet.time")])!=length(unique(param.tune[which(methods=="nnet.time")]))){
-      stop("Tune parameters for nnet.time methods need to be unique")
+  if(sum(methods %in% "nn.time")>=2){ #si plusieurs methodes, check si unique puis check comme une methode pour chacune
+    if(length(param.tune[which(methods=="nn.time")])!=length(unique(param.tune[which(methods=="nn.time")]))){
+      stop("Tune parameters for nn.time methods need to be unique")
     }
-    for (i in 1:sum(methods %in% "nnet.time")){
-      if(!(is.null(param.tune[[which(methods=="nnet.time")[i]]]))){
-        if(!is.list(param.tune[[which(methods=="nnet.time")[i]]])){
-          stop(paste("Argument param.tune for the ",i,"th nnet.time need to be a list"))
+    for (i in 1:sum(methods %in% "nn.time")){
+      if(!(is.null(param.tune[[which(methods=="nn.time")[i]]]))){
+        if(!is.list(param.tune[[which(methods=="nn.time")[i]]])){
+          stop(paste("Argument param.tune for the ",i,"th nn.time need to be a list"))
         }
-        if(sum((names(param.tune[[which(methods=="nnet.time")[i]]])%in%"n.nodes"))==0){
-          stop("Tune parameters for nnet.time need to have n.nodes")
+        if(sum((names(param.tune[[which(methods=="nn.time")[i]]])%in%"n.nodes"))==0){
+          stop("Tune parameters for nn.time need to have n.nodes")
         }
-        if(sum((names(param.tune[[which(methods=="nnet.time")[i]]])%in%"decay"))==0){
-          stop("Tune parameters for nnet.time need to have decay")
+        if(sum((names(param.tune[[which(methods=="nn.time")[i]]])%in%"decay"))==0){
+          stop("Tune parameters for nn.time need to have decay")
         }
-        if(sum((names(param.tune[[which(methods=="nnet.time")[i]]])%in%"batch.size"))==0){
-          stop("Tune parameters for nnet.time need to have batch.size")
+        if(sum((names(param.tune[[which(methods=="nn.time")[i]]])%in%"batch.size"))==0){
+          stop("Tune parameters for nn.time need to have batch.size")
         }
-        if(sum((names(param.tune[[which(methods=="nnet.time")[i]]])%in%"epochs"))==0){
-          stop("Tune parameters for nnet.time need to have epochs")
+        if(sum((names(param.tune[[which(methods=="nn.time")[i]]])%in%"epochs"))==0){
+          stop("Tune parameters for nn.time need to have epochs")
         }
-        if(!(is.numeric(param.tune[[which(methods=="nnet.time")[i]]]$n.nodes)|
-             is.null(param.tune[[which(methods=="nnet.time")[i]]]$n.nodes))){
-          stop("nodesize tune parameters for nnet.time need to be a scalar or a vector or NULL")
+        if(!(is.numeric(param.tune[[which(methods=="nn.time")[i]]]$n.nodes)|
+             is.null(param.tune[[which(methods=="nn.time")[i]]]$n.nodes))){
+          stop("nodesize tune parameters for nn.time need to be a scalar or a vector or NULL")
         }
-        if(!(is.numeric(param.tune[[which(methods=="nnet.time")[i]]]$decay)|
-             is.null(param.tune[[which(methods=="nnet.time")[i]]]$decay))){
-          stop("decay tune parameters for nnet.time need to be a scalar, a vector or NULL")
+        if(!(is.numeric(param.tune[[which(methods=="nn.time")[i]]]$decay)|
+             is.null(param.tune[[which(methods=="nn.time")[i]]]$decay))){
+          stop("decay tune parameters for nn.time need to be a scalar, a vector or NULL")
         }
-        if(!(is.numeric(param.tune[[which(methods=="nnet.time")[i]]]$batch.size)|
-             is.null(param.tune[[which(methods=="nnet.time")[i]]]$batch.size))){
-          stop("batch.size tune parameters for nnet.time need to be a scalar, a vector or NULL")
+        if(!(is.numeric(param.tune[[which(methods=="nn.time")[i]]]$batch.size)|
+             is.null(param.tune[[which(methods=="nn.time")[i]]]$batch.size))){
+          stop("batch.size tune parameters for nn.time need to be a scalar, a vector or NULL")
         }
-        if(!(is.numeric(param.tune[[which(methods=="nnet.time")[i]]]$epochs)|
-             is.null(param.tune[[which(methods=="nnet.time")[i]]]$epochs))){
-          stop("epochs tune parameters for nnet.time need to be a scalar, a vector or NULL")
+        if(!(is.numeric(param.tune[[which(methods=="nn.time")[i]]]$epochs)|
+             is.null(param.tune[[which(methods=="nn.time")[i]]]$epochs))){
+          stop("epochs tune parameters for nn.time need to be a scalar, a vector or NULL")
         }
       }
     }
@@ -1018,7 +1018,7 @@ sl.time <- function( methods=c("cox.lasso", "aft.ggamma"),
   #
   
   
-  if(sum(!(methods %in% c("cox.lasso", "cox.ridge", "rf.time", "nnet.time", "cox.en",
+  if(sum(!(methods %in% c("cox.lasso", "cox.ridge", "rf.time", "nn.time", "cox.en",
                           "aft.weibull","aft.weibull","aft.ggamma","aft.gamma","ph.gompertz","ph.exponential",
                           "aft.llogis","cox.aic","cox.all")))>=1){
     stop("New method is not yet implemented")
@@ -1060,7 +1060,7 @@ sl.time <- function( methods=c("cox.lasso", "aft.ggamma"),
         if(methods[me] %in%"cox.aic"){
           param.tune[[me]]=list(final.model.cov=NA, mini.model.cov=NULL, maxi.model.cov=NULL)
         }
-        if(methods[me] %in%"nnet.time"){
+        if(methods[me] %in%"nn.time"){
           param.tune[[me]]=list(n.nodes=c(2, 3, 4, 6, 10, 20),
                                 decay=c(0, 0.01, 0.1),
                                 batch.size=256L,
@@ -1090,7 +1090,7 @@ sl.time <- function( methods=c("cox.lasso", "aft.ggamma"),
       if(methods[me] %in%"cox.aic"){
         param.tune[[me]]=list(final.model.cov=NA, mini.model.cov=NULL,maxi.model.cov=NULL)
       }
-      if(methods[me] %in%"nnet.time"){
+      if(methods[me] %in%"nn.time"){
         param.tune[[me]]=list(n.nodes=c(2, 3, 4, 6, 10, 20),
                               decay=c(0, 0.01, 0.1),
                               batch.size=256L,
@@ -1408,9 +1408,9 @@ sl.time <- function( methods=c("cox.lasso", "aft.ggamma"),
       rm(.rf.time)
     }
     
-    #### nnet.time
-    if (methods[me] == "nnet.time"){
-      if(verbose==T){print("start nnet.time.r")}
+    #### nn.time
+    if (methods[me] == "nn.time"){
+      if(verbose==T){print("start nn.time.r")}
       torch<-reticulate::import("torch")
       torch$set_num_threads(1L)
       # if(parallel_tune==F){
@@ -1419,12 +1419,12 @@ sl.time <- function( methods=c("cox.lasso", "aft.ggamma"),
       # CS idem param.tune indexe sur me
       if(length(param.tune[[me]]$n.nodes)!=1 | length(param.tune[[me]]$decay)!=1 |
          length(param.tune[[me]]$batch.size)!=1 |length(param.tune[[me]]$epochs)!=1 ){ #si il faut chercher param.tune
-        if(verbose==T){print("estimation of tune parameters for nnet.time")}
+        if(verbose==T){print("estimation of tune parameters for nn.time")}
         
         #pour la recherche des parametres tunes xx est une liste avec 3 elements: data.train / data.valid
         # et grid=nodes+decay fixe parmi tous les k folds et les nodes/decays en a tester
         
-        .tune<- tune.nnet.time(times=times, failures=failures, group=group,
+        .tune<- tune.nn.time(times=times, failures=failures, group=group,
                                cov.quanti=cov.quanti, cov.quali=cov.quali,
                                data=data, cv=cv, 
                                n.nodes=param.tune[[me]]$n.nodes,
@@ -1444,18 +1444,18 @@ sl.time <- function( methods=c("cox.lasso", "aft.ggamma"),
       }
       
       
-      .nnet.time <-nnet.time(times=times, failures=failures, group=group, cov.quanti=cov.quanti, cov.quali=cov.quali, data=data,
+      .nn.time <-nn.time(times=times, failures=failures, group=group, cov.quanti=cov.quanti, cov.quali=cov.quali, data=data,
                              n.nodes=as.numeric(.tune.optimal[[me]]$n.nodes),
                              decay=as.numeric(.tune.optimal[[me]]$decay),
                              batch.size=as.integer(.tune.optimal[[me]]$batch.size),
                              epochs=as.integer(.tune.optimal[[me]]$epochs))
       
       
-      .model[[me]]<-.nnet.time
-      # .model[["nnet.time"]]$predictions<-NULL
-      # FitALL[[me]] <- .nnet.time$predictions
-      # attributes(FitALL$nnet.time)=NULL
-      rm(.nnet.time)
+      .model[[me]]<-.nn.time
+      # .model[["nn.time"]]$predictions<-NULL
+      # FitALL[[me]] <- .nn.time$predictions
+      # attributes(FitALL$nn.time)=NULL
+      rm(.nn.time)
     }
     
   }
@@ -1556,8 +1556,8 @@ sl.time <- function( methods=c("cox.lasso", "aft.ggamma"),
       pred<-predict(fit,newtimes=time.pred, newdata=CV$valid)$predictions
       
     }
-    if(meth =="nnet.time"){
-      fit<-nnet.time(times=times, failures=failures, group=group,  cov.quanti=cov.quanti, cov.quali=cov.quali, data=CV$train,
+    if(meth =="nn.time"){
+      fit<-nn.time(times=times, failures=failures, group=group,  cov.quanti=cov.quanti, cov.quali=cov.quali, data=CV$train,
                      n.nodes=as.numeric(Tune[[num_method]]$n.nodes),
                      decay=as.numeric(Tune[[num_method]]$decay),
                      batch.size=as.integer(Tune[[num_method]]$batch.size),
@@ -2084,7 +2084,7 @@ sl.time <- function( methods=c("cox.lasso", "aft.ggamma"),
             methods=methods,
             models=.model,
             weights=list(coefficients=estim$par, values=w.sl), #
-            metric=metric,
+            metric=list(metric=metric, value=estim$value),
             param.tune=list(optimal=.tune.optimal, results=.tune.results))
   
   class(res) <- "sl.time"
