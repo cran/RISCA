@@ -2,6 +2,14 @@
 gc.survival<-function(object, data, group, times, failures, max.time,
                       effect="ATE", iterations=1000, n.cluster=1, cluster.type="PSOCK"){
   
+  differentiation <- function(x, fx) {
+    n <- length(x)
+    fdx0 <- vector(length = n)
+    for (i in 2:n) {
+      fdx0[i-1] <- (fx[i-1] - fx[i]) / (x[i-1] - x[i])   }
+    fdx0[n] <- (fx[n] - fx[n - 1]) / (x[n] - x[n - 1])
+    return(fdx0)  }
+  
   ### Controls - Start
   
   if(object$call[1] != "coxph()"){
