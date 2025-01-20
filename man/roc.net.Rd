@@ -64,7 +64,7 @@ age.cut <- quantile(dataDIVAT3$ageR, probs=seq(0.1, 0.9, by=0.1))
 
 dataDIVAT3$sex <- "male"
 dataDIVAT3$sex[dataDIVAT3$sexeR==0] <- "female"
-dataDIVAT3$year <- date::mdy.date(month=01, day=01, year=dataDIVAT3$year.tx,
+dataDIVAT3$year <- mdy.date(month=01, day=01, year=dataDIVAT3$year.tx,
  nineteen = TRUE, fillday = FALSE, fillmonth = FALSE)
 dataDIVAT3$age <- dataDIVAT3$ageR*365
 

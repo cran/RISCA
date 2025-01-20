@@ -124,7 +124,7 @@ markov.3states.rsadd(times1=d3$time1, times2=d3$time2, sequences=d3$trajectory,
   cov.13=d3$z, init.cov.13=c(1.04), names.13=c("beta1E_z"),
   cov.23=d3$z, init.cov.23=c(0.29), names.23=c("beta2E_z"),
   p.age=d3$ageR*365.24, p.sex=d3$sexR,
-  p.year=date::as.date(paste("01","01",d3$year.tx), order = "mdy"),
+  p.year=as.date(paste("01","01",d3$year.tx), order = "mdy"),
   p.rate.table=fr.ratetable,  conf.int=TRUE,
   silent=FALSE, precision=0.001)
 }

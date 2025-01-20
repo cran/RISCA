@@ -6,7 +6,7 @@ import(tune)
 
 importFrom(stats, pnorm, dnorm, qnorm, update,  binomial, lm, glm, na.omit, predict, quantile,
            sd, optim, pchisq, update.formula, coef, setNames, as.formula, model.matrix, median, formula)
-importFrom(date, date.mdy, mdy.date, as.date)
+#importFrom(date, date.mdy, mdy.date, as.date)
 importFrom(utils, methods, tail, combn)
 importFrom(graphics, abline, lines, plot.default, grid, segments)
 importFrom(nlme, nlme, varFixed, varPower, nlme.formula)

@@ -128,6 +128,12 @@ semi.markov.3states.rsadd(times1=d3$time1, times2=d3$time2, sequences=d3$traject
   p.year=as.date(paste("01","01",d3$year.tx),order = "mdy"),
   p.rate.table=fr.ratetable,
   conf.int=TRUE, silent=FALSE, precision=0.005)
+  
+  
+  
+  as.date(paste("01","01",d3$year.tx), order = "mdy")
+  
+  
 }
 
 \keyword{Semi-Markov}
