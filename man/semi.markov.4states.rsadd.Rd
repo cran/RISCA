@@ -132,7 +132,7 @@ semi.markov.4states.rsadd(times1=d4$time1, times2=d4$time2, sequences=d4$traject
   ini.dist.23=c(9.43),  ini.dist.24=c(11.11),
   cov.12=d4$z, init.cov.12=c(0.04), names.12=c("beta12_z"),
   p.age=d4$ageR*365.24,  p.sex=d4$sexR,
-  p.year=as.date(paste("01","01",d4$year.tx), order = "mdy"),
+  p.year=as.numeric(as.Date(paste0(d4$year.tx,"-01-01"), origin = "1960-01-01")),
   p.rate.table=fr.ratetable, conf.int=TRUE,
   silent=FALSE, precision=0.001)
 }

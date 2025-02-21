@@ -1,95 +1,7 @@
 
 markov.3states.rsadd <- function(times1, times2, sequences, weights=NULL, dist, cuts.12=NULL,cuts.13=NULL,cuts.23=NULL,ini.dist.12=NULL, ini.dist.13=NULL, ini.dist.23=NULL, cov.12=NULL, init.cov.12=NULL, names.12=NULL, cov.13=NULL, init.cov.13=NULL, names.13=NULL, cov.23=NULL, init.cov.23=NULL, names.23=NULL, p.age, p.sex, p.year, p.rate.table, conf.int=TRUE, silent=TRUE, precision=10^(-6))
 {
-  
-  mdy.date <- function(month, day, year, nineteen = TRUE, fillday = FALSE,
-                       fillmonth = FALSE) {
-    ## Get the Julian date, but centered a la SAS, i.e., Jan 1 1960 is
-    ## day 0.  Algorithm taken from Numerical Recipies.
-    temp <- any((month != trunc(month)) |
-                  (day != trunc(day)) |
-                  (year != trunc(year)))
-    if (!is.na(temp) && temp) {
-      warning("Non integer input values were truncated in mdy.date")
-      month <- trunc(month)
-      day <- trunc(day)
-      year <- trunc(year)
-    }
-    if (nineteen)
-      year <- ifelse(year < 100, year + 1900, year)
-    
-    ## Force input vectors to be the same length, but in a way that
-    ## gives an error if their lengths aren't multiples of each other.
-    temp <- numeric(length(month + day + year))
-    month <- month + temp
-    day   <- day + temp
-    year  <- year + temp
-    
-    if (fillmonth) {
-      temp <- is.na(month)
-      month[temp] <- 7
-      day[temp] <- 1
-    }
-    if (fillday) day[is.na(day)] <- 15
-    
-    month[month < 1 | month > 12] <- NA
-    day[day < 1] <- NA
-    year[year == 0] <- NA               # there is no year 0
-    year <- ifelse(year < 0, year + 1, year)
-    tyear<- ifelse(month > 2, year, year - 1)
-    tmon <- ifelse(month > 2, month + 1, month + 13)
-    
-    julian <-
-      trunc(365.25 * tyear) + trunc(30.6001 * tmon) + day - 715940
-    ## Check for Gregorian calendar changeover on Oct 15, 1582
-    temp <- trunc(0.01 * tyear)
-    save <- ifelse(julian >= -137774,
-                   julian + 2 + trunc(.25 * temp) - temp,
-                   julian)
-    
-    ## Check for invalid days (31 Feb, etc.) by calculating the Julian
-    ## date of the first of the next month
-    year <- ifelse(month == 12, year+1, year)
-    month<- ifelse(month == 12, 1, month + 1)
-    day <- 1
-    tyear<- ifelse(month > 2, year, year - 1)
-    tmon <- ifelse(month > 2, month + 1, month + 13)
-    julian <-
-      trunc(365.25 * tyear) + trunc(30.6001 * tmon) + day - 715940
-    temp <- trunc(0.01 * tyear)
-    save2<- ifelse(julian >= -137774,
-                   julian + 2 + trunc(.25 * temp) - temp,
-                   julian)
-    
-    temp <- as.integer(ifelse(save2 > save, save, NA))
-    attr(temp, "class") <- "date"
-    temp
-  }
-  
-  date.mdy <- function(sdate, weekday = FALSE) {
-    ##  Return the month, day, and year given a julian date
-    attr(sdate, "class") <- NULL        # Stop any propogation of methods
-    sdate <- floor(sdate + 2436935)     # From SAS to Num Recipies base
-    # point 
-    wday <- as.integer((sdate + 1) %% 7 +1)
-    temp <- ((sdate - 1867216) -.25) / 36524.25
-    sdate <- ifelse(sdate >= 2299161,
-                    trunc(sdate+ 1 +temp - trunc(.25 * temp)),
-                    sdate)
-    jb <- sdate + 1524
-    jc <- trunc(6680 + ((jb - 2439870) - 122.1) / 365.25)
-    jd <- trunc(365.25 * jc)
-    je <- trunc((jb - jd)/ 30.6001)
-    day <- (jb - jd) - trunc(30.6001 * je)
-    month <- as.integer(ifelse(je > 13, je - 13, je - 1))
-    year  <- as.integer(ifelse(month > 2, jc - 4716, jc - 4715))
-    year  <- as.integer(ifelse(year <= 0, year - 1, year))
-    if (weekday)
-      list(month = month, day = day, year = year, weekday = wday)
-    else
-      list(month = month, day = day, year = year)
-  }
-  
+
 #check conditions
 if (missing(times1)) 
         stop("Argument 'times1' is missing with no default")
@@ -316,7 +228,7 @@ if (is.na(min(p.sex)))
 		
 if(!is.numeric(p.year))
  {stop("Argument 'p.year' must be a numeric vector")} 
-if(as.numeric(mdy.date(as.numeric(substr(Sys.Date(),6,7)),as.numeric(substr(Sys.Date(),9,10)),as.numeric(substr(Sys.Date(),1,4)))-max(p.year,na.rm=T))<0)
+if(as.numeric(Sys.Date()- as.Date(max(p.year), origin = "1960-01-01"))<0)
  {stop("Some dates are greater than current date: check that 'p.year' is a date format (number of days since 01.01.1960)")}
 if (is.na(min(p.year)))
 		warning("individuals with missing values on 'p.year' will be removed from the analysis \n")
@@ -532,7 +444,7 @@ if (is.null(weights)) {w <- rep(1, length(d1))} else {w <- weights}
 h3P<-function(rate.table,age,sex,year,t){
 age.year<-age/365.24
 t.year<-t/365.24
-year.year<-(date.mdy(year))$year
+year.year<- as.numeric( format(as.Date(year, origin = "1960-01-01"), "%Y"))
 maxyear.ratetable<-max(as.numeric(attributes(rate.table)$dimnames[[3]]))
 minage.year.ratetable<-round(min(as.numeric(attributes(rate.table)$dimnames[[1]])/365.24))
 return(mapply(FUN=function(age,sex,year) {rate.table[age,sex,year]},trunc(trunc(age.year)+t.year)-minage.year.ratetable+1,sex,as.character(pmin(maxyear.ratetable,trunc(year.year+t.year)))))

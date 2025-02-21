@@ -125,15 +125,9 @@ semi.markov.3states.rsadd(times1=d3$time1, times2=d3$time2, sequences=d3$traject
   cov.13=d3$z, init.cov.13=c(1.04), names.13=c("beta1E_z"),
   cov.23=d3$z, init.cov.23=c(0.29), names.23=c("beta2E_z"),
   p.age=d3$ageR*365.24,  p.sex=d3$sexR,
-  p.year=as.date(paste("01","01",d3$year.tx),order = "mdy"),
+  p.year=as.numeric(as.Date(paste0(d3$year.tx,"-01-01"), origin = "1960-01-01")),
   p.rate.table=fr.ratetable,
   conf.int=TRUE, silent=FALSE, precision=0.005)
-  
-  
-  
-  as.date(paste("01","01",d3$year.tx), order = "mdy")
-  
-  
 }
 
 \keyword{Semi-Markov}
